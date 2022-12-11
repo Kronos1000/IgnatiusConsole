@@ -1,0 +1,10 @@
+How to Add Quiz Questions 
+
+Enter the follwing Attributes Seperated by a | 
+
+Question 
+Subject 
+A
+B
+C
+Correct Answer ( which will be be either A,B Or C)
