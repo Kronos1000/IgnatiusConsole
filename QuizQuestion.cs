@@ -8,6 +8,15 @@ namespace QuizME
 {
     public  class QuizQuestion
     {
+
+        private int arraycount;
+
+        public int ArrayCount
+        {
+            get { return arraycount; }
+            set { arraycount = value; }
+        }
+
         private string question;
 
         public string Question
