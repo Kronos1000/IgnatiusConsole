@@ -6,3 +6,15 @@ D:\QuizME\bin\Debug\QuizME.exe
 D:\QuizME\bin\Debug\QuizME.pdb
 D:\QuizME\obj\Debug\QuizME.exe
 D:\QuizME\obj\Debug\QuizME.pdb
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\bin\Debug\QuizME.exe.config
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\bin\Debug\QuizME.exe.manifest
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\bin\Debug\QuizME.application
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\bin\Debug\QuizME.exe
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\bin\Debug\QuizME.pdb
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\obj\Debug\QuizME.csproj.AssemblyReference.cache
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\obj\Debug\QuizME.csproj.SuggestedBindingRedirects.cache
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\obj\Debug\QuizME.csproj.CoreCompileInputs.cache
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\obj\Debug\QuizME.exe.manifest
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\obj\Debug\QuizME.application
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\obj\Debug\QuizME.exe
+C:\Users\Patrick\Documents\GitHub\IgnatiusConsole\obj\Debug\QuizME.pdb

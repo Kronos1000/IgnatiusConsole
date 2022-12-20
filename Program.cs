@@ -34,7 +34,7 @@ namespace QuizME
         {
             List<QuizQuestion> QuestionList = new List<QuizQuestion>();
 
-            using (StreamReader reader = new StreamReader("quiz.txt"))
+            using (StreamReader reader = new StreamReader("./quiz.txt"))
             {
                 while (!reader.EndOfStream)
                 {
