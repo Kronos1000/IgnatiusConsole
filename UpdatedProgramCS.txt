@@ -413,14 +413,13 @@ public static void DeleteQuestion()
  {
 List<QuizQuestion> QuestionList = GetData();
 QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
-
+Showquestions(); // Call ShowQuestions Method
 Console.WriteLine("Please Enter The number of the question you wish to delete");  // prompt user for input 
 int userInput = int.Parse(Console.ReadLine()); // read in array position 
 
-
-
 string qRemove = (qArray[userInput].Question + " | " + qArray[userInput].Subject + " | " +qArray[userInput].OptionONE + " | " + qArray[userInput].OptionTWO + " | " + qArray[userInput].OptionTHREE + " | " + qArray[userInput].CorrectAnswer);
 }
+
     
 	
         private static void ExitProgram()
