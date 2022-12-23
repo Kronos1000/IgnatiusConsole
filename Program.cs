@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +11,14 @@ namespace QuizME
 {
     public class Program
     {
+      
 
         static void Main(string[] args)
         {
 
             MainMenu();
             // Main Menu 
-            String Banner = @"
-  _____                  _   _           
- |_   _|                | | (_)          
-   | |  __ _ _ __   __ _| |_ _ _   _ ___ 
-   | | / _` | '_ \ / _` | __| | | | / __|
-  _| || (_| | | | | (_| | |_| | |_| \__ \
- |_____\__, |_| |_|\__,_|\__|_|\__,_|___/
-        __/ |                            
-       |___/  ";
+      IgnatiusBanner();
 
         }
 
@@ -64,16 +57,7 @@ namespace QuizME
 
             Console.Clear(); // Clear Screen wihen showing menu 
                              // Main Menu 
-            String Banner = @"
-  _____                  _   _           
- |_   _|                | | (_)          
-   | |  __ _ _ __   __ _| |_ _ _   _ ___ 
-   | | / _` | '_ \ / _` | __| | | | / __|
-  _| || (_| | | | | (_| | |_| | |_| \__ \
- |_____\__, |_| |_|\__,_|\__|_|\__,_|___/
-        __/ |                            
-       |___/  ";
-            Console.WriteLine(Banner);
+           IgnatiusBanner();
            // Console.WriteLine("Welcome To the Quiz Room");
             Console.WriteLine(" Please Enter the Number of the task you want to perform");
             Console.WriteLine("1. Start Quiz (10 Random Questions)");
@@ -112,16 +96,7 @@ namespace QuizME
         private static void ShowQuestions()
         {
             Console.Clear();
-            String Banner = @"
-  _____                  _   _           
- |_   _|                | | (_)          
-   | |  __ _ _ __   __ _| |_ _ _   _ ___ 
-   | | / _` | '_ \ / _` | __| | | | / __|
-  _| || (_| | | | | (_| | |_| | |_| \__ \
- |_____\__, |_| |_|\__,_|\__|_|\__,_|___/
-        __/ |                            
-       |___/  ";
-            Console.WriteLine(Banner);
+  IgnatiusBanner();
             List<QuizQuestion> QuestionList = GetData(); // Read in Data
             Console.WriteLine("The Following Questions are in the quiz bank: ");
             // Insert 2 lines before returning questions 
@@ -146,16 +121,7 @@ namespace QuizME
         private static void AddQuestion() // Add Question Method 
         {
             Console.Clear();
-            String Banner = @"
-  _____                  _   _           
- |_   _|                | | (_)          
-   | |  __ _ _ __   __ _| |_ _ _   _ ___ 
-   | | / _` | '_ \ / _` | __| | | | / __|
-  _| || (_| | | | | (_| | |_| | |_| \__ \
- |_____\__, |_| |_|\__,_|\__|_|\__,_|___/
-        __/ |                            
-       |___/  ";
-            Console.WriteLine(Banner);
+    IgnatiusBanner();
             Console.WriteLine("Please Enter Question");
             string q = Console.ReadLine();
             Console.WriteLine("Enter question Subject");
@@ -181,17 +147,7 @@ namespace QuizME
 
         private static void StartQuiz() // Quiz Method (10 Random Questions)
         {
-
-            String Banner = @"
-  _____                  _   _           
- |_   _|                | | (_)          
-   | |  __ _ _ __   __ _| |_ _ _   _ ___ 
-   | | / _` | '_ \ / _` | __| | | | / __|
-  _| || (_| | | | | (_| | |_| | |_| \__ \
- |_____\__, |_| |_|\__,_|\__|_|\__,_|___/
-        __/ |                            
-       |___/  ";
-            Console.WriteLine(Banner);
+  IgnatiusBanner();
 
 
             List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
@@ -211,16 +167,7 @@ namespace QuizME
                 for (int i = 0; i < quizLength; i++)
                 {
                     Console.Clear();
-                    Banner = @"
-  _____                  _   _           
- |_   _|                | | (_)          
-   | |  __ _ _ __   __ _| |_ _ _   _ ___ 
-   | | / _` | '_ \ / _` | __| | | | / __|
-  _| || (_| | | | | (_| | |_| | |_| \__ \
- |_____\__, |_| |_|\__,_|\__|_|\__,_|___/
-        __/ |                            
-       |___/  ";
-                    Console.WriteLine(Banner);
+                   IgnatiusBanner();
                     R = RandQuestion.Next(0, qArray.Length);
                     R = RandQuestion.Next(0, qArray.Length);
                     double questionDisplayCount = QuestionCounter + 1;
@@ -408,13 +355,49 @@ namespace QuizME
                 }
 
             }
-        }
+		}
+public static void DeleteQuestion()
+ {
+List<QuizQuestion> QuestionList = GetData();
+QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
 
-       
+Console.WriteLine("Please Enter The number of the question you wish to delete");  // prompt user for input 
+int userInput = int.Parse(Console.ReadLine()); // read in array position 
+
+
+
+string qRemove = (qArray[userInput].Question + " | " + qArray[userInput].Subject + " | " +qArray[userInput].OptionONE + " | " + qArray[userInput].OptionTWO + " | " + qArray[userInput].OptionTHREE + " | " + qArray[userInput].CorrectAnswer);
+}
+    
+	
         private static void ExitProgram()
         {
             System.Environment.Exit(0);
         }
+     
+     
+     
+ public static void IgnatiusBanner() // Banner Method 
+    { 
+        // Define Variale to store banner 
+         String Banner = @"
+  _____                  _   _           
+ |_   _|                | | (_)          
+   | |  __ _ _ __   __ _| |_ _ _   _ ___ 
+   | | / _` | '_ \ / _` | __| | | | / __|
+  _| || (_| | | | | (_| | |_| | |_| \__ \
+ |_____\__, |_| |_|\__,_|\__|_|\__,_|___/
+        __/ |                            
+       |___/  ";
+Console.WriteLine(Banner); // Print to screen 
 
+// Blank lines after printing ignatius banner 
+Console.WriteLine(); 
+Console.WriteLine();
     }
 }
+    }
+
+
+  
+
