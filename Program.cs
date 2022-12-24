@@ -86,6 +86,7 @@ namespace QuizME
             {
                 ShowQuestions();
             }
+	
 
             if (MenuChoice == 5)
             {
@@ -251,16 +252,8 @@ namespace QuizME
 
         private static void QuizOnEverything() // Quiz Method
         {
-
-            String Banner = @"
-  _____                  _   _           
- |_   _|                | | (_)          
-   | |  __ _ _ __   __ _| |_ _ _   _ ___ 
-   | | / _` | '_ \ / _` | __| | | | / __|
-  _| || (_| | | | | (_| | |_| | |_| \__ \
- |_____\__, |_| |_|\__,_|\__|_|\__,_|___/
-        __/ |                            
-       |___/  ";
+	Console.Clear();
+IngatiusBanner();
 
             List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
             double PlayerScore = 0; // Define Player Score counter Variable
@@ -288,8 +281,8 @@ namespace QuizME
                     Console.WriteLine("   B: " + qArray[i].OptionTWO);
                     Console.WriteLine("   C: " + qArray[i].OptionTHREE);
 
-                    String UserAnswer = Console.ReadLine();
-
+                    String UserAnswer = Console.ReadLine().ToUpper();
+		    
                     if (UserAnswer == qArray[i].CorrectAnswer)
                     {
                         Console.WriteLine("Correct");
