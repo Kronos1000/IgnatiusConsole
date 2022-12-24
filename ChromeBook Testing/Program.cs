@@ -95,7 +95,7 @@ namespace QuizME
         {
             List<QuizQuestion> QuestionList = new List<QuizQuestion>();
 
-         Console.Writeline("Please Copy data from quiz.txt One line at a Time");
+         Console.WriteLine("Please Copy data from quiz.txt One line at a Time");
                 string line = Console.ReadLine();
                 while (line != "#")
                 {
