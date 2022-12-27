@@ -26,7 +26,8 @@ namespace QuizME
         public static List<QuizQuestion> GetData()
         {
             List<QuizQuestion> QuestionList = new List<QuizQuestion>();
-
+            List<string> TopicList = new List<string>();
+            //string[] topics; 
             using (StreamReader reader = new StreamReader("./quiz.txt"))
             {
                 while (!reader.EndOfStream)
@@ -46,11 +47,15 @@ namespace QuizME
                     QuestionList.Add(Q);
 
                 }
-
                 return QuestionList;
+              }
+             
+               
+
+               
             }
 
-        }
+        
 
         private static void MainMenu() // Main Menu Method 
         {
@@ -152,6 +157,8 @@ namespace QuizME
 
 
             List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
+
+      
             double PlayerScore = 0; // Define Player Score counter Variable
             double QuestionCounter = 0; // Count have many questions to been shown to player
 
@@ -388,7 +395,7 @@ Console.WriteLine();
 Console.WriteLine();
     }
 }
-    }
+ }
 
 
   
