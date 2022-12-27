@@ -60,7 +60,7 @@ namespace QuizME
            IgnatiusBanner();
            // Console.WriteLine("Welcome To the Quiz Room");
             Console.WriteLine(" Please Enter the Number of the task you want to perform");
-            Console.WriteLine("1. Start Quiz (10 Random Questions)");
+            Console.WriteLine("1. Start Quiz");
             Console.WriteLine("2. Start Quiz (All Questions in the  Quiz Bank)");
             Console.WriteLine("3. Add Question");
             Console.WriteLine("4. Show All Questions");
@@ -160,8 +160,8 @@ namespace QuizME
             // Generate Random Number to use later 
             Random RandQuestion = new Random();
             int R = RandQuestion.Next(0, qArray.Length);
-
-            int quizLength = 10;
+            Console.WriteLine("How Many Questions would you like");
+            int quizLength = int.Parse(Console.ReadLine());
             if (QuestionCounter + 1 <= quizLength)
             {
 
@@ -180,8 +180,8 @@ namespace QuizME
                     Console.WriteLine("   B: " + qArray[R].OptionTWO);
                     Console.WriteLine("   C: " + qArray[R].OptionTHREE);
 
-                    String UserAnswer = Console.ReadLine();
-                    UserAnswer = UserAnswer.ToUpper();
+                    String UserAnswer = Console.ReadLine().ToUpper();
+
                     if (UserAnswer == qArray[R].CorrectAnswer)
                     {
                         Console.WriteLine("Correct");
@@ -253,7 +253,7 @@ namespace QuizME
         private static void QuizOnEverything() // Quiz Method
         {
 	Console.Clear();
-IngatiusBanner();
+IgnatiusBanner();
 
             List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
             double PlayerScore = 0; // Define Player Score counter Variable
@@ -269,8 +269,7 @@ IngatiusBanner();
                 for (int i = 0; i < quizLength; i++)
                 {
                     Console.Clear();
-                   
-                    Console.WriteLine(Banner);
+                   IgnatiusBanner();
                     
                     double  questionDisplayCount = QuestionCounter + 1;
                     int QuestionAmountShown = quizLength;
@@ -321,7 +320,7 @@ IngatiusBanner();
 
                 // Display Player Score when # is entered 
                 Console.Clear();
-                    Console.WriteLine(Banner);
+                IgnatiusBanner();
 
                 double percentage = PlayerScore / QuestionCounter * 100;
                 Console.WriteLine("You have Answered " + PlayerScore + " out of " + QuestionCounter + " Questions Correctly");
