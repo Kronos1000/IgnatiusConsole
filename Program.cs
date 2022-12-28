@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
- 
+
 
 namespace QuizME
 {
     public class Program
     {
-      
+
 
         static void Main(string[] args)
         {
 
             MainMenu();
             // Main Menu 
-      IgnatiusBanner();
+            IgnatiusBanner();
 
         }
 
@@ -26,8 +26,7 @@ namespace QuizME
         public static List<QuizQuestion> GetData()
         {
             List<QuizQuestion> QuestionList = new List<QuizQuestion>();
-            List<string> TopicList = new List<string>();
-            //string[] topics; 
+
             using (StreamReader reader = new StreamReader("./quiz.txt"))
             {
                 while (!reader.EndOfStream)
@@ -48,22 +47,36 @@ namespace QuizME
 
                 }
                 return QuestionList;
-              }
-             
-               
-
-               
             }
 
-        
+
+
+        }
+
+        private static List<string> GetQuizTopics()
+        {
+            List<string> TopicList = new List<string>();
+
+            using (StreamReader reader = new StreamReader("./quizTopics.txt"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    TopicList.Add(reader.ReadLine());
+                }
+
+                return TopicList;
+            }
+        }
+
+
 
         private static void MainMenu() // Main Menu Method 
         {
 
             Console.Clear(); // Clear Screen wihen showing menu 
                              // Main Menu 
-           IgnatiusBanner();
-           // Console.WriteLine("Welcome To the Quiz Room");
+            IgnatiusBanner();
+            // Console.WriteLine("Welcome To the Quiz Room");
             Console.WriteLine(" Please Enter the Number of the task you want to perform");
             Console.WriteLine("1. Start Quiz");
             Console.WriteLine("2. Start Quiz (All Questions in the  Quiz Bank)");
@@ -81,8 +94,8 @@ namespace QuizME
             {
                 QuizOnEverything();
             }
-            
-            if (MenuChoice == 3 )
+
+            if (MenuChoice == 3)
             {
                 AddQuestion();
             }
@@ -91,7 +104,7 @@ namespace QuizME
             {
                 ShowQuestions();
             }
-	
+
 
             if (MenuChoice == 5)
             {
@@ -102,7 +115,7 @@ namespace QuizME
         private static void ShowQuestions()
         {
             Console.Clear();
-  IgnatiusBanner();
+            IgnatiusBanner();
             List<QuizQuestion> QuestionList = GetData(); // Read in Data
             Console.WriteLine("The Following Questions are in the quiz bank: ");
             // Insert 2 lines before returning questions 
@@ -112,7 +125,7 @@ namespace QuizME
             foreach (QuizQuestion question in QuestionList)
             {
                 // QCount++;
-                Console.WriteLine("["+ QCount +"]" + " "+ question.Question);
+                Console.WriteLine("[" + QCount + "]" + " " + question.Question);
                 QCount++;
             }
             Console.WriteLine();
@@ -127,7 +140,7 @@ namespace QuizME
         private static void AddQuestion() // Add Question Method 
         {
             Console.Clear();
-    IgnatiusBanner();
+            IgnatiusBanner();
             Console.WriteLine("Please Enter Question");
             string q = Console.ReadLine();
             Console.WriteLine("Enter question Subject");
@@ -153,12 +166,14 @@ namespace QuizME
 
         private static void StartQuiz() // Quiz Method (10 Random Questions)
         {
-  IgnatiusBanner();
+            IgnatiusBanner();
 
 
             List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
+            List<string> TopicList = GetQuizTopics();
+            string[] TopicArray = TopicList.ToArray();
 
-      
+
             double PlayerScore = 0; // Define Player Score counter Variable
             double QuestionCounter = 0; // Count have many questions to been shown to player
 
@@ -167,15 +182,27 @@ namespace QuizME
             // Generate Random Number to use later 
             Random RandQuestion = new Random();
             int R = RandQuestion.Next(0, qArray.Length);
+            Console.Clear();
+            IgnatiusBanner();
             Console.WriteLine("How Many Questions would you like");
             int quizLength = int.Parse(Console.ReadLine());
+            //Console.Clear();
+            //IgnatiusBanner();
+            //Console.WriteLine("The availiable  quiz topics are as follows");
+
+            //for (int i = 0; i < TopicArray.Length; i++)
+            //{
+            //    Console.WriteLine(TopicArray[i]);
+            //}
+            //String TopicChoice = Console.ReadLine();
+
             if (QuestionCounter + 1 <= quizLength)
             {
 
                 for (int i = 0; i < quizLength; i++)
                 {
                     Console.Clear();
-                   IgnatiusBanner();
+                    IgnatiusBanner();
                     R = RandQuestion.Next(0, qArray.Length);
                     R = RandQuestion.Next(0, qArray.Length);
                     double questionDisplayCount = QuestionCounter + 1;
@@ -194,7 +221,7 @@ namespace QuizME
                         Console.WriteLine("Correct");
                         PlayerScore++; // Increase score if answer is Correct 
                         QuestionCounter++; // Increase Question Counter 
-                         if (QuestionCounter <= quizLength -1)
+                        if (QuestionCounter <= quizLength - 1)
                         {
                             Console.WriteLine("Press Enter For the next Question");
                         }
@@ -221,11 +248,11 @@ namespace QuizME
                     }
 
                     UserAnswer = Console.ReadLine();
-                    if(QuestionCounter == quizLength-1)
+                    if (QuestionCounter == quizLength - 1)
                     {
                         Console.WriteLine("Press Enter For the next Question");
                     }
-                    
+
                 }
 
 
@@ -259,8 +286,8 @@ namespace QuizME
 
         private static void QuizOnEverything() // Quiz Method
         {
-	Console.Clear();
-IgnatiusBanner();
+            Console.Clear();
+            IgnatiusBanner();
 
             List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
             double PlayerScore = 0; // Define Player Score counter Variable
@@ -276,9 +303,9 @@ IgnatiusBanner();
                 for (int i = 0; i < quizLength; i++)
                 {
                     Console.Clear();
-                   IgnatiusBanner();
-                    
-                    double  questionDisplayCount = QuestionCounter + 1;
+                    IgnatiusBanner();
+
+                    double questionDisplayCount = QuestionCounter + 1;
                     int QuestionAmountShown = quizLength;
                     Console.WriteLine("Question " + questionDisplayCount + " of " + QuestionAmountShown);
                     // return question at array postion i 
@@ -288,13 +315,13 @@ IgnatiusBanner();
                     Console.WriteLine("   C: " + qArray[i].OptionTHREE);
 
                     String UserAnswer = Console.ReadLine().ToUpper();
-		    
+
                     if (UserAnswer == qArray[i].CorrectAnswer)
                     {
                         Console.WriteLine("Correct");
                         PlayerScore++; // Increase score if answer is Correct 
                         QuestionCounter++; // Increase Question Counter 
-                        if (QuestionCounter <= quizLength -1)
+                        if (QuestionCounter <= quizLength - 1)
                         {
                             Console.WriteLine("Press Enter For the next Question");
                         }
@@ -309,7 +336,7 @@ IgnatiusBanner();
                         Console.WriteLine("Sorry The Answer is Incorrect");
                         Console.WriteLine("The Correct Answer was: " + qArray[i].CorrectAnswer);
                         QuestionCounter++; // Increase Question Counter 
-                        if (QuestionCounter <= quizLength -1)
+                        if (QuestionCounter <= quizLength - 1)
                         {
                             Console.WriteLine("Press Enter For the next Question");
                         }
@@ -321,7 +348,7 @@ IgnatiusBanner();
                     }
 
                     UserAnswer = Console.ReadLine();
-             
+
 
                 }
 
@@ -354,32 +381,32 @@ IgnatiusBanner();
                 }
 
             }
-		}
-public static void DeleteQuestion()
- {
-List<QuizQuestion> QuestionList = GetData();
-QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
+        }
+        public static void DeleteQuestion()
+        {
+            List<QuizQuestion> QuestionList = GetData();
+            QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
 
-Console.WriteLine("Please Enter The number of the question you wish to delete");  // prompt user for input 
-int userInput = int.Parse(Console.ReadLine()); // read in array position 
+            Console.WriteLine("Please Enter The number of the question you wish to delete");  // prompt user for input 
+            int userInput = int.Parse(Console.ReadLine()); // read in array position 
 
 
 
-string qRemove = (qArray[userInput].Question + " | " + qArray[userInput].Subject + " | " +qArray[userInput].OptionONE + " | " + qArray[userInput].OptionTWO + " | " + qArray[userInput].OptionTHREE + " | " + qArray[userInput].CorrectAnswer);
-}
-    
-	
+            string qRemove = (qArray[userInput].Question + " | " + qArray[userInput].Subject + " | " + qArray[userInput].OptionONE + " | " + qArray[userInput].OptionTWO + " | " + qArray[userInput].OptionTHREE + " | " + qArray[userInput].CorrectAnswer);
+        }
+
+
         private static void ExitProgram()
         {
             System.Environment.Exit(0);
         }
-     
-     
-     
- public static void IgnatiusBanner() // Banner Method 
-    { 
-        // Define Variale to store banner 
-         String Banner = @"
+
+
+
+        public static void IgnatiusBanner() // Banner Method 
+        {
+            // Define Variale to store banner 
+            String Banner = @"
   _____                  _   _           
  |_   _|                | | (_)          
    | |  __ _ _ __   __ _| |_ _ _   _ ___ 
@@ -388,15 +415,15 @@ string qRemove = (qArray[userInput].Question + " | " + qArray[userInput].Subject
  |_____\__, |_| |_|\__,_|\__|_|\__,_|___/
         __/ |                            
        |___/  ";
-Console.WriteLine(Banner); // Print to screen 
+            Console.WriteLine(Banner); // Print to screen 
 
-// Blank lines after printing ignatius banner 
-Console.WriteLine(); 
-Console.WriteLine();
+            // Blank lines after printing ignatius banner 
+            Console.WriteLine();
+            Console.WriteLine();
+        }
     }
 }
- }
 
 
-  
+
 
