@@ -374,7 +374,9 @@ namespace QuizME
             IgnatiusBanner();
             Console.WriteLine("Please Enter Question");
             string q = Console.ReadLine();
-            Console.WriteLine("Enter question Subject");
+            Console.WriteLine("Which Paper is the Question for");
+       
+
             String qSubject = Console.ReadLine();
             Console.WriteLine("Enter Multiple Choice Option 1 ");
             String A = Console.ReadLine();
@@ -391,7 +393,9 @@ namespace QuizME
                 
                 writer.WriteLine(QuestionToADD);
             }
-            MainMenu();
+
+          
+                MainMenu();
 
         }
 
