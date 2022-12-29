@@ -370,7 +370,8 @@ namespace QuizME
             Console.WriteLine("Please Enter Question");
             string q = Console.ReadLine();
             Console.WriteLine("Enter question Subject");
-            String qSubject = Console.ReadLine();
+            String qSubject = Console.ReadLine()
+                ;
             Console.WriteLine("Enter Multiple Choice Option 1 ");
             String A = Console.ReadLine();
             Console.WriteLine("Enter Multiple Choice Option 2");
@@ -436,7 +437,7 @@ namespace QuizME
             Console.WriteLine();
 
             Console.WriteLine("Please enter the quiz Topic you wish to add to the quiz bank");
-            string AddTopic = Console.ReadLine();
+            string AddTopic = Console.ReadLine().ToLower();
 
             using (StreamWriter writer = File.AppendText("quizTopics.txt"))
             {
