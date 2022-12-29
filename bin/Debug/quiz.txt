@@ -6,3 +6,5 @@ What Flavor is Midori|Midori|Melon|Lime|Strawberry|1
 Does This Work|Testing|Maybe|No|Yes|3
 Are you sure this Works|Testing|Yes|Maybe|No|1
 Is it working|Testing|Yes|No|Maybe|1
+Is midori a drink|Midori|yes|no |maybe|1
+is patrick real|Patrick|yes|yes|no|1

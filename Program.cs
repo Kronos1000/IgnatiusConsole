@@ -33,6 +33,8 @@ namespace QuizME
                     string[] parts = line.Split('|');
 
                     string Question = parts[0];
+                     
+                    
                     string Subject = parts[1];
                     string A = parts[2];
                     string B = parts[3];
@@ -162,7 +164,7 @@ namespace QuizME
 
             int topicChoice = int.Parse(Console.ReadLine());
 
-          
+           
 
             // for loop to read in subject specfic questions 
             for (int i = 0; i < qArray.Length; i++)
@@ -172,10 +174,8 @@ namespace QuizME
                     quizQuestionSet.Add(qArray[i]);
                 }
             }
-
             // create quiz array 
             QuizQuestion[] QuizArray = quizQuestionSet.ToArray();
-
             if (QuestionCounter + 1 <= quizLength)
             {
 
@@ -370,8 +370,7 @@ namespace QuizME
             Console.WriteLine("Please Enter Question");
             string q = Console.ReadLine();
             Console.WriteLine("Enter question Subject");
-            String qSubject = Console.ReadLine()
-                ;
+            String qSubject = Console.ReadLine();
             Console.WriteLine("Enter Multiple Choice Option 1 ");
             String A = Console.ReadLine();
             Console.WriteLine("Enter Multiple Choice Option 2");
@@ -383,8 +382,8 @@ namespace QuizME
 
             using (StreamWriter writer = File.AppendText("quiz.txt"))
             {
-                string QuestionToADD = (q + "|" + qSubject + "|" + A + "|" + B + "|" + C + "|" + CorrectANS + "\n");
-
+                string QuestionToADD = (q + "|" + qSubject + "|" + A + "|" + B + "|" + C + "|" + CorrectANS);
+                
                 writer.WriteLine(QuestionToADD);
             }
             MainMenu();
@@ -437,11 +436,11 @@ namespace QuizME
             Console.WriteLine();
 
             Console.WriteLine("Please enter the quiz Topic you wish to add to the quiz bank");
-            string AddTopic = Console.ReadLine().ToLower();
+            string AddTopic = Console.ReadLine();
 
             using (StreamWriter writer = File.AppendText("quizTopics.txt"))
             {
-                writer.WriteLine(AddTopic);
+                writer.WriteLine(Environment.NewLine +AddTopic);
             }
 
             Console.WriteLine("The following topic has been added: " + AddTopic);
@@ -453,8 +452,6 @@ namespace QuizME
 
         private static void ShowQuizTopics()
         {
-            Console.Clear();
-            IgnatiusBanner();
             Console.WriteLine("The following Topics are currently availiable");
 
             int tCount = 0; // variable to count the number of topics 
