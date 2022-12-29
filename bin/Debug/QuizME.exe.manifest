@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="QuizME.exe" size="14792">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="QuizME.exe" size="16328">
       <assemblyIdentity name="QuizME" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6WI5005AtrGvBK/t/WgmYL4ymTrOj0R5EKvSWt5YgR8=</dsig:DigestValue>
+        <dsig:DigestValue>Y6rcQzhMTi4gb43gLSDOZ2seE6grOcbY68oePizCeBM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

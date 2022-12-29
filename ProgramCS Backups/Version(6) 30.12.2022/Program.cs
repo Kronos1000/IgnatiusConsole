@@ -14,7 +14,6 @@ namespace QuizME
 
         static void Main(string[] args)
         {
-            
             MainMenu();
             // Main Menu 
             IgnatiusBanner();
@@ -69,7 +68,6 @@ namespace QuizME
 
 
 
-
         private static void MainMenu() // Main Menu Method 
         {
 
@@ -79,100 +77,74 @@ namespace QuizME
             // Console.WriteLine("Welcome To the Quiz Room");
             Console.WriteLine(" Please Enter the Number of the task you want to perform");
             Console.WriteLine("1) Start Quiz");
-            Console.WriteLine("2) Add Question");
-            Console.WriteLine("3) Show All Questions");
-            Console.WriteLine("4) Add New Quiz Topic");
-            Console.WriteLine("5) Show Availiable Quiz Topics");
-            Console.WriteLine("6) Help Menu");
-            Console.WriteLine("7) Exit Program");
+            Console.WriteLine("2) Start Quiz (All Questions in the  Quiz Bank)");
+            Console.WriteLine("3) Add Question");
+            Console.WriteLine("4) Show All Questions");
+            Console.WriteLine("5) Add New Quiz Topic");
+            Console.WriteLine("6) Show Availiable Quiz Topics");
+            Console.WriteLine("7) Help Menu");
+            Console.WriteLine("8) Exit Program");
 
             int MenuChoice = int.Parse(Console.ReadLine());
             if (MenuChoice == 1)
             {
-                //StartQuiz();
-                QuizMenu();
+                StartQuiz();
             }
 
             if (MenuChoice == 2)
             {
-                AddQuestion();
+                QuizOnEverything();
             }
 
             if (MenuChoice == 3)
             {
-                ShowQuestions();
+                AddQuestion();
             }
 
             if (MenuChoice == 4)
             {
-                AddQuizTopic();
+                ShowQuestions();
             }
 
 
             if (MenuChoice == 5)
             {
-                ShowQuizTopics();
+                AddQuizTopic();
             }
 
             if (MenuChoice == 6)
             {
-                HelpMenu();
+                ShowQuizTopics();
             }
 
             if (MenuChoice == 7)
             {
+                HelpMenu();
+            }
+            if (MenuChoice == 8)
+            {
                 ExitProgram();
             }
-        
         }
 
-        private static void QuizMenu()
-        {
-            Console.Clear();
-            IgnatiusBanner();
-
-            Console.WriteLine("Please Enter the Number Of The Desired Option");
-            Console.WriteLine();
-            Console.WriteLine("1) All Questions,All Subjects");
-            Console.WriteLine("2) All Questions on Your choice of Subject");
-            Console.WriteLine("3) A Selection of Random Questions On Your  Choice Of Subject");
-
-            Console.WriteLine("4) Return To The Main Menu");
-
-            int MenuDecision = int.Parse(Console.ReadLine());
-
-            if (MenuDecision ==1 )
-            {
-                QuizOnEverything();
-            }
-
-            if (MenuDecision ==2)
-            {
-                AllQuestionsOnSubject();
-            }
-            if (MenuDecision == 3)
-            {
-                RandomQuestionsOnSubject();
-            }
-
-
-
-            if (MenuDecision == 4)
-            {
-                MainMenu();
-            }
-       
-        }
-        private static void RandomQuestionsOnSubject()
+        private static void StartQuiz()
         {
             IgnatiusBanner();
+
+
             List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
             List<string> TopicList = GetQuizTopics();
             string[] TopicArray = TopicList.ToArray();
+
             List<QuizQuestion> quizQuestionSet = new List<QuizQuestion>();
+
             double PlayerScore = 0; // Define Player Score counter Variable
             double QuestionCounter = 0; // Count have many questions to been shown to player
+
             QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
+
+
+
             // Generate Random Number to use later 
             Random RandQuestion = new Random();
             int R = RandQuestion.Next(0, qArray.Length);
@@ -297,145 +269,6 @@ namespace QuizME
                 }
             }
         }
-
-        private static void AllQuestionsOnSubject()
-        {
-            Console.Clear();
-           
-         IgnatiusBanner();
-        List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
-        List<string> TopicList = GetQuizTopics();
-        string[] TopicArray = TopicList.ToArray();
-
-        double PlayerScore = 0; // Define Player Score counter Variable
-        double QuestionCounter = 0; // Count have many questions to been shown to player
-        QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
-        List<QuizQuestion> quizQuestionSet = new List<QuizQuestion>();
-          //  QuizQuestion[] QuizArray = quizQuestionSet.ToArray();
-            Console.Clear();
-            IgnatiusBanner();
-
-
-            Console.Clear();
-            IgnatiusBanner();
-            Console.WriteLine("Please enter the number of the subject you would like to be tested on");
-            int tCount = 0; // variable to count the number of topics 
-
-            for (int i = 0; i<TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-
-    int topicChoice = int.Parse(Console.ReadLine());
-
-           
-
-            // for loop to read in subject specfic questions 
-            for (int i = 0; i<qArray.Length; i++)
-            {
-                if (qArray[i].Subject == TopicArray[topicChoice])
-                {
-                    quizQuestionSet.Add(qArray[i]);
-                }
-            }
-
-
-            // create quiz array 
-            QuizQuestion[] QuizArray = quizQuestionSet.ToArray();
-
-            int quizLength = QuizArray.Length;
-            if (QuestionCounter + 1 <= quizLength)
-{
-
-    for (int i = 0; i < quizLength; i++)
-    {
-        Console.Clear();
-        IgnatiusBanner();
-      
-
-        double questionDisplayCount = QuestionCounter + 1;
-        int QuestionAmountShown = quizLength;
-        Console.WriteLine("Question " + questionDisplayCount + " of " + QuestionAmountShown);
-        // return question at array postion R 
-        Console.WriteLine(QuizArray[i].Question);
-        Console.WriteLine("   1) " + QuizArray[i].OptionONE);
-        Console.WriteLine("   2) " + QuizArray[i].OptionTWO);
-        Console.WriteLine("   3) " + QuizArray[i].OptionTHREE);
-
-        String UserAnswer = Console.ReadLine().ToUpper();
-
-        if (UserAnswer == QuizArray[i].CorrectAnswer)
-        {
-            Console.WriteLine("Correct");
-            PlayerScore++; // Increase score if answer is Correct 
-            QuestionCounter++; // Increase Question Counter 
-            if (QuestionCounter <= quizLength - 1)
-            {
-                Console.WriteLine("Press Enter For the next Question");
-            }
-
-            if (QuestionCounter == quizLength)
-            {
-                Console.WriteLine("Press Enter For Quiz Results");
-            }
-        }
-        else
-        {
-            Console.WriteLine("Sorry The Answer is Incorrect");
-            Console.WriteLine("The Correct Answer was: " + QuizArray[i].CorrectAnswer);
-            QuestionCounter++; // Increase Question Counter 
-            if (QuestionCounter <= quizLength - 1)
-            {
-                Console.WriteLine("Press Enter For the next Question");
-            }
-
-            if (QuestionCounter == quizLength)
-            {
-                Console.WriteLine("Press Enter For Quiz Results");
-            }
-        }
-
-        UserAnswer = Console.ReadLine();
-        if (QuestionCounter == quizLength - 1)
-        {
-            Console.WriteLine("Press Enter For the next Question");
-        }
-
-    }
-
-
-    // Display Player Score when # is entered 
-    Console.Clear();
-    double percentage = PlayerScore / QuestionCounter * 100;
-    Console.WriteLine("You have Answered " + PlayerScore + " out of " + QuestionCounter + " Questions Correctly");
-    Console.WriteLine("Overall Percentage: {0:0.00} Percent", percentage);
-
-    Console.WriteLine("Type exit to close program");
-    Console.WriteLine("Type menu to return to the main Menu");
-
-    string QuizEndDecision = Console.ReadLine();
-
-    if (QuizEndDecision == "menu")
-    {
-        MainMenu();
-
-    }
-
-    if (QuizEndDecision == "exit")
-    {
-        System.Environment.Exit(0);
-    }
-    else // Close program if user enters anything other than "menu" OR "exit" 
-    {
-        System.Environment.Exit(0);
-    }
-}
-        }
-
-       
-
-
 
         private static void QuizOnEverything() // Quiz Method
         {
