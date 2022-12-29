@@ -114,7 +114,7 @@ namespace QuizME
                 AddQuizTopic();
             }
 
-            if (MenuChoice == 6)
+            if(MenuChoice == 6)
             {
                 ShowQuizTopics();
             }
@@ -167,9 +167,9 @@ namespace QuizME
             Console.WriteLine();
 
             Console.WriteLine("Press enter to return to the main menu");
-            Console.ReadLine();
+            Console.ReadLine ();
         }
-        private static void AddQuizTopic()
+         private static void AddQuizTopic()
         {
             Console.Clear();
             IgnatiusBanner();
@@ -179,7 +179,7 @@ namespace QuizME
 
             int tCount = 0; // variable to count the number of topics 
             List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
+            string[] TopicArray =  TopicList.ToArray(); 
             for (int i = 0; i < TopicArray.Length; i++)
             {
                 Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
@@ -193,7 +193,7 @@ namespace QuizME
             string AddTopic = Console.ReadLine();
 
             using (StreamWriter writer = File.AppendText("quizTopics.txt"))
-            {
+            { 
                 writer.WriteLine(AddTopic);
             }
 
@@ -230,68 +230,6 @@ namespace QuizME
 
         }
 
-        private static void AddQuizTopic()
-        {
-            Console.Clear();
-            IgnatiusBanner();
-
-            Console.WriteLine("Add New Quiz Topic");
-            Console.WriteLine("The following Topics are currently availiable");
-
-            int tCount = 0; // variable to count the number of topics 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            for (int i = 0; i < TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-            // blank line before prompt
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Please enter the quiz Topic you wish to add to the quiz bank");
-            string AddTopic = Console.ReadLine();
-
-            using (StreamWriter writer = File.AppendText("quizTopics.txt"))
-            {
-                writer.WriteLine(AddTopic);
-            }
-
-            Console.WriteLine("The following topic has been added: " + AddTopic);
-            Console.WriteLine("Press enter for the main menu ");
-            Console.ReadLine();
-            MainMenu();
-
-        }
-
-
-        private static void ShowQuizTopics()
-        {
-            Console.WriteLine("The following Topics are currently availiable");
-
-            int tCount = 0; // variable to count the number of topics 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            for (int i = 0; i < TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-            // blank line efore prompt
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Press enter to return to the main menu");
-            Console.ReadLine();
-        }
-
-
-
-
-
-
-
         private static void StartQuiz() // Quiz Method (10 Random Questions)
         {
             IgnatiusBanner();
@@ -299,7 +237,7 @@ namespace QuizME
 
             List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
             List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
+            string[] TopicArray = TopicList.ToArray(); 
 
             List<QuizQuestion> quizQuestionSet = new List<QuizQuestion>();
 
@@ -331,7 +269,7 @@ namespace QuizME
                 Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
                 tCount++;
             }
-
+            
             int topicChoice = int.Parse(Console.ReadLine());
 
             // create quiz array 
