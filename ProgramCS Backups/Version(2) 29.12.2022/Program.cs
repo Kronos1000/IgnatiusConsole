@@ -43,7 +43,7 @@ namespace QuizME
                     string CorrectAnswer = parts[5];
 
                     QuizQuestion Q = new QuizQuestion(Question, Subject, A, B, C, CorrectAnswer);
-
+                   
                     QuestionList.Add(Q);
 
                 }
@@ -79,11 +79,11 @@ namespace QuizME
             IgnatiusBanner();
             // Console.WriteLine("Welcome To the Quiz Room");
             Console.WriteLine(" Please Enter the Number of the task you want to perform");
-            Console.WriteLine("1) Start Quiz");
-            Console.WriteLine("2) Start Quiz (All Questions in the  Quiz Bank)");
-            Console.WriteLine("3) Add Question");
-            Console.WriteLine("4) Show All Questions");
-            Console.WriteLine("5) Exit Program");
+            Console.WriteLine("1. Start Quiz");
+            Console.WriteLine("2. Start Quiz (All Questions in the  Quiz Bank)");
+            Console.WriteLine("3. Add Question");
+            Console.WriteLine("4. Show All Questions");
+            Console.WriteLine("5. Exit Program");
 
             int MenuChoice = int.Parse(Console.ReadLine());
             if (MenuChoice == 1)
@@ -126,7 +126,7 @@ namespace QuizME
             foreach (QuizQuestion question in QuestionList)
             {
                 // QCount++;
-                Console.WriteLine("[" + QCount + "]" + " " + question.Question + " (" + question.Subject + ")");
+                Console.WriteLine("[" + QCount + "]" + " " + question.Question + " (" +question.Subject + ")");
                 QCount++;
             }
             Console.WriteLine();
@@ -146,13 +146,13 @@ namespace QuizME
             string q = Console.ReadLine();
             Console.WriteLine("Enter question Subject");
             String qSubject = Console.ReadLine();
-            Console.WriteLine("Enter Multiple Choice Option 1 ");
+            Console.WriteLine("Enter Multiple Choice Option A ");
             String A = Console.ReadLine();
-            Console.WriteLine("Enter Multiple Choice Option 2");
+            Console.WriteLine("Enter Multiple Choice Option B");
             String B = Console.ReadLine();
-            Console.WriteLine("Enter Multiple Choice Option 3 ");
+            Console.WriteLine("Enter Multiple Choice Option C ");
             String C = Console.ReadLine();
-            Console.WriteLine("Enter option number  of Correct Answer ");
+            Console.WriteLine("Enter Letter  of Correct Answer ");
             String CorrectANS = Console.ReadLine();
 
             using (StreamWriter writer = File.AppendText("quizBackup.txt"))
@@ -181,12 +181,12 @@ namespace QuizME
 
             QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
 
-
+        
 
             // Generate Random Number to use later 
             Random RandQuestion = new Random();
             int R = RandQuestion.Next(0, qArray.Length);
-
+          
             Console.Clear();
             IgnatiusBanner();
             Console.WriteLine("How Many Questions would you like");
@@ -204,7 +204,7 @@ namespace QuizME
                 Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
                 tCount++;
             }
-            
+            Console.WriteLine("Please enter the number of the subject you would like to be tested on");
             int topicChoice = int.Parse(Console.ReadLine());
 
             // create quiz array 
@@ -224,7 +224,7 @@ namespace QuizME
 
 
 
-            if (QuestionCounter + 1 <= quizLength)
+            if (QuestionCounter + 1 <= quizLength )
             {
 
                 for (int i = 0; i < quizLength; i++)
@@ -232,16 +232,16 @@ namespace QuizME
                     Console.Clear();
                     IgnatiusBanner();
                     R = RandQuestion.Next(0, QuizArray.Length);
-
+          
 
                     double questionDisplayCount = QuestionCounter + 1;
                     int QuestionAmountShown = quizLength;
                     Console.WriteLine("Question " + questionDisplayCount + " of " + QuestionAmountShown);
                     // return question at array postion R 
                     Console.WriteLine(QuizArray[R].Question);
-                    Console.WriteLine("   1) " + QuizArray[R].OptionONE);
-                    Console.WriteLine("   2) " + QuizArray[R].OptionTWO);
-                    Console.WriteLine("   3) " + QuizArray[R].OptionTHREE);
+                    Console.WriteLine("   A: " + QuizArray[R].OptionONE);
+                    Console.WriteLine("   B: " + QuizArray[R].OptionTWO);
+                    Console.WriteLine("   C: " + QuizArray[R].OptionTHREE);
 
                     String UserAnswer = Console.ReadLine().ToUpper();
 
@@ -326,7 +326,7 @@ namespace QuizME
 
 
             int quizLength = qArray.Length;
-            if (QuestionCounter + 1 <= quizLength)
+            if (QuestionCounter + 1 <= quizLength )
             {
 
                 for (int i = 0; i < quizLength; i++)
@@ -339,9 +339,9 @@ namespace QuizME
                     Console.WriteLine("Question " + questionDisplayCount + " of " + QuestionAmountShown);
                     // return question at array postion i 
                     Console.WriteLine(qArray[i].Question);
-                    Console.WriteLine("   1): " + qArray[i].OptionONE);
-                    Console.WriteLine("   2) " + qArray[i].OptionTWO);
-                    Console.WriteLine("   3) " + qArray[i].OptionTHREE);
+                    Console.WriteLine("   A: " + qArray[i].OptionONE);
+                    Console.WriteLine("   B: " + qArray[i].OptionTWO);
+                    Console.WriteLine("   C: " + qArray[i].OptionTHREE);
 
                     String UserAnswer = Console.ReadLine().ToUpper();
 

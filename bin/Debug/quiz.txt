@@ -1,8 +1,8 @@
-What is Ingatius|General Info|A fork of the midori Project|Ronan's Alter Ego|Nothing|A
-How old Is Patrick|Patrick|21|24|19|B
-Is the Sky Blue|General Info|No|Maybe|Yes|C
-What Color is Midori|Midori|Blue|Green|Red|B
-What Flavor is Midori|Midori|Melon|Lime|Strawberry|A
-Does This Work|Testing|Maybe|No|Yes|C
-Are you sure this Works|Testing|Yes|Maybe|No|A
-Is it working|Testing|Yes|No|Maybe|A
+What is Ingatius|General Info|A fork of the midori Project|Ronan's Alter Ego|Nothing|1
+How old Is Patrick|Patrick|21|24|19|2
+Is the Sky Blue|General Info|No|Maybe|Yes|3
+What Color is Midori|Midori|Blue|Green|Red|2
+What Flavor is Midori|Midori|Melon|Lime|Strawberry|1
+Does This Work|Testing|Maybe|No|Yes|3
+Are you sure this Works|Testing|Yes|Maybe|No|1
+Is it working|Testing|Yes|No|Maybe|1
