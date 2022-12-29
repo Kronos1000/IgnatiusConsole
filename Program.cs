@@ -82,7 +82,8 @@ namespace QuizME
             Console.WriteLine("4) Show All Questions");
             Console.WriteLine("5) Add New Quiz Topic");
             Console.WriteLine("6) Show Availiable Quiz Topics");
-            Console.WriteLine("7) Exit Program");
+            Console.WriteLine("7) Help Menu");
+            Console.WriteLine("8) Exit Program");
 
             int MenuChoice = int.Parse(Console.ReadLine());
             if (MenuChoice == 1)
@@ -117,6 +118,10 @@ namespace QuizME
             }
 
             if (MenuChoice == 7)
+            {
+                HelpMenu();
+            }
+            if (MenuChoice == 8)
             {
                 ExitProgram();
             }
@@ -452,6 +457,8 @@ namespace QuizME
 
         private static void ShowQuizTopics()
         {
+            Console.Clear();
+            IgnatiusBanner();
             Console.WriteLine("The following Topics are currently availiable");
 
             int tCount = 0; // variable to count the number of topics 
@@ -462,14 +469,52 @@ namespace QuizME
                 Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
                 tCount++;
             }
-            // blank line efore prompt
+            // blank line before prompt
             Console.WriteLine();
             Console.WriteLine();
 
             Console.WriteLine("Press enter to return to the main menu");
-            Console.ReadLine();
-        }
+            string QuizEndDecision = Console.ReadLine();
 
+            if (QuizEndDecision == "menu")
+            {
+                MainMenu();
+
+            }
+
+            else
+            {
+                MainMenu();
+            }
+        }
+        private static void HelpMenu()
+        {
+            Console.Clear();
+            IgnatiusBanner();
+            string helpText = @"*** Help Menu ***
+Important points to remember 
+1) The Quiz topic must exist in the quizTopics.txt file in order to have option of being quizzed on it.
+2) when you add a question ensure that the Subject feild Matches the subject in the quizTopics.txt file exactly
+   if needed use the ShowQuizTopic command before the AddQuestion Command.";
+
+            Console.WriteLine(helpText);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("   Type menu to return to the main Menu");
+
+            string QuizEndDecision = Console.ReadLine();
+
+            if (QuizEndDecision == "menu")
+            {
+                MainMenu();
+
+            }
+
+            else
+            {
+                MainMenu();
+            }
+        }
         private static void ExitProgram()
         {
             System.Environment.Exit(0);
