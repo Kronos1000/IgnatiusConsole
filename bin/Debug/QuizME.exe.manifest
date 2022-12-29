@@ -49,17 +49,17 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>kmnwTVWCkImJLJnH4ajdgrD/0xHjd1fT1vxj1daqs4M=</dsig:DigestValue>
+        <dsig:DigestValue>dL54DNuHxaf/e2/Kn8JO84ZyWPI49/Zu0m1fBJZKHjw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="QuizME.exe.config" size="187">
+  <file name="QuizME.exe.config" size="182">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>+CM46OnHRrXZXNLMx7+U3V3iubiYL//d8hGOR13lDhU=</dsig:DigestValue>
+      <dsig:DigestValue>6yF81Kr/18DMcg6buS9ejUGZvWeN+ejf96BxgtNWgIE=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

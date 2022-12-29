@@ -83,9 +83,7 @@ namespace QuizME
             Console.WriteLine("2) Start Quiz (All Questions in the  Quiz Bank)");
             Console.WriteLine("3) Add Question");
             Console.WriteLine("4) Show All Questions");
-            Console.WriteLine("5) Add New Quiz Topic");
-            Console.WriteLine("6) Show Availiable Quiz Topics");
-            Console.WriteLine("7) Exit Program");
+            Console.WriteLine("5) Exit Program");
 
             int MenuChoice = int.Parse(Console.ReadLine());
             if (MenuChoice == 1)
@@ -110,16 +108,6 @@ namespace QuizME
 
 
             if (MenuChoice == 5)
-            {
-                AddQuizTopic();
-            }
-
-            if (MenuChoice == 6)
-            {
-                ShowQuizTopics();
-            }
-
-            if (MenuChoice == 7)
             {
                 ExitProgram();
             }
@@ -150,59 +138,6 @@ namespace QuizME
 
         }
 
-        private static void ShowQuizTopics()
-        {
-            Console.WriteLine("The following Topics are currently availiable");
-
-            int tCount = 0; // variable to count the number of topics 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            for (int i = 0; i < TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-            // blank line efore prompt
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Press enter to return to the main menu");
-            Console.ReadLine();
-        }
-        private static void AddQuizTopic()
-        {
-            Console.Clear();
-            IgnatiusBanner();
-
-            Console.WriteLine("Add New Quiz Topic");
-            Console.WriteLine("The following Topics are currently availiable");
-
-            int tCount = 0; // variable to count the number of topics 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            for (int i = 0; i < TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-            // blank line before prompt
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Please enter the quiz Topic you wish to add to the quiz bank");
-            string AddTopic = Console.ReadLine();
-
-            using (StreamWriter writer = File.AppendText("quizTopics.txt"))
-            {
-                writer.WriteLine(AddTopic);
-            }
-
-            Console.WriteLine("The following topic has been added: " + AddTopic);
-            Console.WriteLine("Press enter for the main menu ");
-            Console.ReadLine();
-            MainMenu();
-
-        }
         private static void AddQuestion() // Add Question Method 
         {
             Console.Clear();
@@ -220,7 +155,7 @@ namespace QuizME
             Console.WriteLine("Enter option number  of Correct Answer ");
             String CorrectANS = Console.ReadLine();
 
-            using (StreamWriter writer = File.AppendText("quiz.txt"))
+            using (StreamWriter writer = File.AppendText("quizBackup.txt"))
             {
                 string QuestionToADD = (q + " | " + qSubject + " | " + A + " | " + B + " | " + C + " | " + CorrectANS);
 
@@ -229,68 +164,6 @@ namespace QuizME
             MainMenu();
 
         }
-
-        private static void AddQuizTopic()
-        {
-            Console.Clear();
-            IgnatiusBanner();
-
-            Console.WriteLine("Add New Quiz Topic");
-            Console.WriteLine("The following Topics are currently availiable");
-
-            int tCount = 0; // variable to count the number of topics 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            for (int i = 0; i < TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-            // blank line before prompt
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Please enter the quiz Topic you wish to add to the quiz bank");
-            string AddTopic = Console.ReadLine();
-
-            using (StreamWriter writer = File.AppendText("quizTopics.txt"))
-            {
-                writer.WriteLine(AddTopic);
-            }
-
-            Console.WriteLine("The following topic has been added: " + AddTopic);
-            Console.WriteLine("Press enter for the main menu ");
-            Console.ReadLine();
-            MainMenu();
-
-        }
-
-
-        private static void ShowQuizTopics()
-        {
-            Console.WriteLine("The following Topics are currently availiable");
-
-            int tCount = 0; // variable to count the number of topics 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            for (int i = 0; i < TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-            // blank line efore prompt
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Press enter to return to the main menu");
-            Console.ReadLine();
-        }
-
-
-
-
-
-
 
         private static void StartQuiz() // Quiz Method (10 Random Questions)
         {
@@ -331,7 +204,7 @@ namespace QuizME
                 Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
                 tCount++;
             }
-
+            
             int topicChoice = int.Parse(Console.ReadLine());
 
             // create quiz array 

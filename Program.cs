@@ -12,17 +12,15 @@ namespace QuizME
     public class Program
     {
 
-
         static void Main(string[] args)
         {
-
             MainMenu();
             // Main Menu 
             IgnatiusBanner();
 
         }
 
-
+        /// Get Data Methods
         public static List<QuizQuestion> GetData()
         {
             List<QuizQuestion> QuestionList = new List<QuizQuestion>();
@@ -49,9 +47,6 @@ namespace QuizME
                 }
                 return QuestionList;
             }
-
-
-
         }
 
         private static List<string> GetQuizTopics()
@@ -125,120 +120,7 @@ namespace QuizME
             }
         }
 
-        private static void ShowQuestions()
-        {
-            Console.Clear();
-            IgnatiusBanner();
-            List<QuizQuestion> QuestionList = GetData(); // Read in Data
-            Console.WriteLine("The Following Questions are in the quiz bank: ");
-            // Insert 2 lines before returning questions 
-            Console.WriteLine();
-            Console.WriteLine();
-            int QCount = 0;
-            foreach (QuizQuestion question in QuestionList)
-            {
-                // QCount++;
-                Console.WriteLine("[" + QCount + "]" + " " + question.Question + " (" + question.Subject + ")");
-                QCount++;
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("");
-            Console.ReadLine(); // pause for user input 
-
-            MainMenu();
-
-        }
-
-        private static void ShowQuizTopics()
-        {
-            Console.WriteLine("The following Topics are currently availiable");
-
-            int tCount = 0; // variable to count the number of topics 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            for (int i = 0; i < TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-            // blank line efore prompt
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Press enter to return to the main menu");
-            Console.ReadLine();
-        }
-        private static void AddQuizTopic()
-        {
-            Console.Clear();
-            IgnatiusBanner();
-
-            Console.WriteLine("Add New Quiz Topic");
-            Console.WriteLine("The following Topics are currently availiable");
-
-            int tCount = 0; // variable to count the number of topics 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            for (int i = 0; i < TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-            // blank line before prompt
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Please enter the quiz Topic you wish to add to the quiz bank");
-            string AddTopic = Console.ReadLine();
-
-            using (StreamWriter writer = File.AppendText("quizTopics.txt"))
-            {
-                writer.WriteLine(AddTopic);
-            }
-
-            Console.WriteLine("The following topic has been added: " + AddTopic);
-            Console.WriteLine("Press enter for the main menu ");
-            Console.ReadLine();
-            MainMenu();
-
-        }
-        private static void AddQuestion() // Add Question Method 
-        {
-            Console.Clear();
-            IgnatiusBanner();
-            Console.WriteLine("Please Enter Question");
-            string q = Console.ReadLine();
-            Console.WriteLine("Enter question Subject");
-            String qSubject = Console.ReadLine();
-            Console.WriteLine("Enter Multiple Choice Option 1 ");
-            String A = Console.ReadLine();
-            Console.WriteLine("Enter Multiple Choice Option 2");
-            String B = Console.ReadLine();
-            Console.WriteLine("Enter Multiple Choice Option 3 ");
-            String C = Console.ReadLine();
-            Console.WriteLine("Enter option number  of Correct Answer ");
-            String CorrectANS = Console.ReadLine();
-
-            using (StreamWriter writer = File.AppendText("quiz.txt"))
-            {
-                string QuestionToADD = (q + " | " + qSubject + " | " + A + " | " + B + " | " + C + " | " + CorrectANS);
-
-                writer.WriteLine(QuestionToADD);
-            }
-            MainMenu();
-
-        }
-
-
-
-
-
-
-
-
-
-        private static void StartQuiz() // Quiz Method (10 Random Questions)
+        private static void StartQuiz()
         {
             IgnatiusBanner();
 
@@ -280,7 +162,7 @@ namespace QuizME
 
             int topicChoice = int.Parse(Console.ReadLine());
 
-            // create quiz array 
+          
 
             // for loop to read in subject specfic questions 
             for (int i = 0; i < qArray.Length; i++)
@@ -291,11 +173,8 @@ namespace QuizME
                 }
             }
 
+            // create quiz array 
             QuizQuestion[] QuizArray = quizQuestionSet.ToArray();
-
-
-
-
 
             if (QuestionCounter + 1 <= quizLength)
             {
@@ -484,19 +363,114 @@ namespace QuizME
 
             }
         }
-        public static void DeleteQuestion()
+        private static void AddQuestion() // Add Question Method 
         {
-            List<QuizQuestion> QuestionList = GetData();
-            QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
+            Console.Clear();
+            IgnatiusBanner();
+            Console.WriteLine("Please Enter Question");
+            string q = Console.ReadLine();
+            Console.WriteLine("Enter question Subject");
+            String qSubject = Console.ReadLine();
+            Console.WriteLine("Enter Multiple Choice Option 1 ");
+            String A = Console.ReadLine();
+            Console.WriteLine("Enter Multiple Choice Option 2");
+            String B = Console.ReadLine();
+            Console.WriteLine("Enter Multiple Choice Option 3 ");
+            String C = Console.ReadLine();
+            Console.WriteLine("Enter option number  of Correct Answer ");
+            String CorrectANS = Console.ReadLine();
 
-            Console.WriteLine("Please Enter The number of the question you wish to delete");  // prompt user for input 
-            int userInput = int.Parse(Console.ReadLine()); // read in array position 
+            using (StreamWriter writer = File.AppendText("quiz.txt"))
+            {
+                string QuestionToADD = (q + "|" + qSubject + "|" + A + "|" + B + "|" + C + "|" + CorrectANS + "\n");
 
+                writer.WriteLine(QuestionToADD);
+            }
+            MainMenu();
 
-
-            string qRemove = (qArray[userInput].Question + " | " + qArray[userInput].Subject + " | " + qArray[userInput].OptionONE + " | " + qArray[userInput].OptionTWO + " | " + qArray[userInput].OptionTHREE + " | " + qArray[userInput].CorrectAnswer);
         }
 
+        private static void ShowQuestions()
+        {
+            Console.Clear();
+            IgnatiusBanner();
+            List<QuizQuestion> QuestionList = GetData(); // Read in Data
+            Console.WriteLine("The Following Questions are in the quiz bank: ");
+            // Insert 2 lines before returning questions 
+            Console.WriteLine();
+            Console.WriteLine();
+            int QCount = 0;
+            foreach (QuizQuestion question in QuestionList)
+            {
+                // QCount++;
+                Console.WriteLine("[" + QCount + "]" + " " + question.Question + " (" + question.Subject + ")");
+                QCount++;
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("");
+            Console.ReadLine(); // pause for user input 
+
+            MainMenu();
+
+        }
+
+        private static void AddQuizTopic()
+        {
+            Console.Clear();
+            IgnatiusBanner();
+
+            Console.WriteLine("Add New Quiz Topic");
+            Console.WriteLine("The following Topics are currently availiable");
+
+            int tCount = 0; // variable to count the number of topics 
+            List<string> TopicList = GetQuizTopics();
+            string[] TopicArray = TopicList.ToArray();
+            for (int i = 0; i < TopicArray.Length; i++)
+            {
+                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
+                tCount++;
+            }
+            // blank line before prompt
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.WriteLine("Please enter the quiz Topic you wish to add to the quiz bank");
+            string AddTopic = Console.ReadLine();
+
+            using (StreamWriter writer = File.AppendText("quizTopics.txt"))
+            {
+                writer.WriteLine(AddTopic);
+            }
+
+            Console.WriteLine("The following topic has been added: " + AddTopic);
+            Console.WriteLine("Press enter for the main menu ");
+            Console.ReadLine();
+            MainMenu();
+
+        }
+
+        private static void ShowQuizTopics()
+        {
+            Console.Clear();
+            IgnatiusBanner();
+            Console.WriteLine("The following Topics are currently availiable");
+
+            int tCount = 0; // variable to count the number of topics 
+            List<string> TopicList = GetQuizTopics();
+            string[] TopicArray = TopicList.ToArray();
+            for (int i = 0; i < TopicArray.Length; i++)
+            {
+                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
+                tCount++;
+            }
+            // blank line efore prompt
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.WriteLine("Press enter to return to the main menu");
+            Console.ReadLine();
+        }
 
         private static void ExitProgram()
         {
@@ -525,7 +499,6 @@ namespace QuizME
         }
     }
 }
-
 
 
 
