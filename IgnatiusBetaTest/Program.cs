@@ -272,7 +272,6 @@ namespace QuizME
 
                 // Display Player Score when # is entered 
                 Console.Clear();
-                IgnatiusBanner();
                 double percentage = PlayerScore / QuestionCounter * 100;
                 Console.WriteLine("You have Answered " + PlayerScore + " out of " + QuestionCounter + " Questions Correctly");
                 Console.WriteLine("Overall Percentage: {0:0.00} Percent", percentage);
@@ -408,7 +407,6 @@ namespace QuizME
 
     // Display Player Score when # is entered 
     Console.Clear();
-                IgnatiusBanner();
     double percentage = PlayerScore / QuestionCounter * 100;
     Console.WriteLine("You have Answered " + PlayerScore + " out of " + QuestionCounter + " Questions Correctly");
     Console.WriteLine("Overall Percentage: {0:0.00} Percent", percentage);
