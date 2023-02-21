@@ -3,12 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgnatiusConsole", "IgnatiusConsole\IgnatiusConsole.csproj", "{39E3D209-9C96-4D3D-8E72-ADC4DF3E64CC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F8220A2-2C6A-42F9-A595-DFB6631E9FA0}"
-	ProjectSection(SolutionItems) = preProject
-		Class1.cs = Class1.cs
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgnatiusConsole", "IgnatiusConsole.csproj", "{39E3D209-9C96-4D3D-8E72-ADC4DF3E64CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {32A260D9-1B3E-4410-A4B6-06CE43F90BDB}
+		SolutionGuid = {ED6274E6-F828-4F88-AF61-2AD197461720}
 	EndGlobalSection
 EndGlobal
