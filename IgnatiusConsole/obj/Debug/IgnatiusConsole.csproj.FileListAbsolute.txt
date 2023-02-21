@@ -1,0 +1,8 @@
+C:\Users\Patrick\source\repos\IgnatiusConsole\IgnatiusConsole\bin\Debug\IgnatiusConsole.exe.config
+C:\Users\Patrick\source\repos\IgnatiusConsole\IgnatiusConsole\bin\Debug\IgnatiusConsole.exe
+C:\Users\Patrick\source\repos\IgnatiusConsole\IgnatiusConsole\bin\Debug\IgnatiusConsole.pdb
+C:\Users\Patrick\source\repos\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.csproj.AssemblyReference.cache
+C:\Users\Patrick\source\repos\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.csproj.SuggestedBindingRedirects.cache
+C:\Users\Patrick\source\repos\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.csproj.CoreCompileInputs.cache
+C:\Users\Patrick\source\repos\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.exe
+C:\Users\Patrick\source\repos\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.pdb
