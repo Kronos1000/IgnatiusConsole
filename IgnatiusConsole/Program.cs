@@ -556,7 +556,7 @@ namespace IgnatiusConsole
             Console.WriteLine("Enter option number  of Correct Answer ");
             String CorrectANS = Console.ReadLine();
 
-            using (StreamWriter writer = File.AppendText("/quiz.txt"))
+            using (StreamWriter writer = File.AppendText("./quiz.txt"))
             {
                 string QuestionToADD = (q + "|" + qSubject + "|" + A + "|" + B + "|" + C + "|" + CorrectANS);
 
@@ -617,7 +617,7 @@ namespace IgnatiusConsole
 
             string AddTopic = Console.ReadLine();
 
-            using (StreamWriter writer = File.AppendText("/quizTopics.txt"))
+            using (StreamWriter writer = File.AppendText("./quizTopics.txt"))
             {
                 writer.WriteLine(AddTopic);
             }
