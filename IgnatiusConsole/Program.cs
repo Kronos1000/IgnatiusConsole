@@ -556,7 +556,7 @@ namespace IgnatiusConsole
             Console.WriteLine("Enter option number  of Correct Answer ");
             String CorrectANS = Console.ReadLine();
 
-            using (StreamWriter writer = File.AppendText("./quiz.txt"))
+            using (StreamWriter writer = File.AppendText("quiz.txt"))
             {
                 string QuestionToADD = (q + "|" + qSubject + "|" + A + "|" + B + "|" + C + "|" + CorrectANS);
 
@@ -616,8 +616,8 @@ namespace IgnatiusConsole
             Console.WriteLine("Please enter the quiz Topic you wish to add to the quiz bank");
 
             string AddTopic = Console.ReadLine();
-
-            using (StreamWriter writer = File.AppendText("./quizTopics.txt"))
+           
+            using (StreamWriter writer = File.AppendText("quizTopics.txt"))
             {
                 writer.WriteLine(AddTopic);
             }

@@ -29,3 +29,4 @@ What is a negative risk|ITC601|Danger|Hazard|Threat|3
 What is the percentage range of risk occurring|ITC601|0-100 %|1-99 %|90-100 %|2
 In managing uncertain events in the workplace, what is probability?|ITC601|The Likehood that event will occur|the chance of avoiding an incident|The consequences of the event occurring|1
 What type of risk response reduces the uncertainty to 0%?|ITC601|Avoidance|Acceptance|Share/Transfer|1
+Is the file there|Testing|Y|N|Maybe|1
