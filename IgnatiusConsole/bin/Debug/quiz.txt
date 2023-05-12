@@ -15,7 +15,7 @@ What is Confirmation Bias?|ITC608|The tendency to search for, favour and recall 
 Which of these is NOT a principle of good level design?|ITC608|Fun To Explore|Becomes more difficult as you progress|Tells a story without words|2
 Which of these is NOT a principle of good level design?|ITC608|Is Efficient|Dynamically Challenges you |Good colour usage|3
 Which of these is anything called out by text or speech?|ITC608|Explicit|Implicit|Emergent|1
-What is the A in ADSR|ITC608|Approach|Arrival|Attack|3
+	What is the A in ADSR|ITC608|Approach|Arrival|Attack|3
 What is the D in ADSR|ITC608|Development|Derivision|Decay|3
 What is the S in ADSR|ITC608|Soundwave|Sustain|Stop|2
 What is the R in ADSR|ITC608|Release|Repeat|Reduce|1

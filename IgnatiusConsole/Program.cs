@@ -79,12 +79,10 @@ namespace IgnatiusConsole
             // Console.WriteLine("Welcome To the Quiz Room");
             Console.WriteLine(" Please Enter the Number of the task you want to perform");
             Console.WriteLine("1) Start Quiz");
-            Console.WriteLine("2) Add Question");
-            Console.WriteLine("3) Show All Questions");
-            Console.WriteLine("4) Add New Quiz Topic");
-            Console.WriteLine("5) Show Availiable Quiz Topics");
-            Console.WriteLine("6) Help Menu");
-            Console.WriteLine("7) Exit Program");
+            Console.WriteLine("2) Questions");
+            Console.WriteLine("3) Quiz Topics");
+            Console.WriteLine("4) Instructions");
+            Console.WriteLine("5) Exit Program");
 
             int MenuChoice = int.Parse(Console.ReadLine());
             if (MenuChoice == 1)
@@ -95,34 +93,28 @@ namespace IgnatiusConsole
 
             if (MenuChoice == 2)
             {
-                AddQuestion();
+                QuestionsMenu();
             }
+
 
             if (MenuChoice == 3)
             {
-                ShowQuestions();
+               QuizTopicsMenu();
             }
+
 
             if (MenuChoice == 4)
-            {
-                AddQuizTopic();
-            }
-
-
-            if (MenuChoice == 5)
-            {
-                ShowQuizTopics();
-            }
-
-            if (MenuChoice == 6)
             {
                 HelpMenu();
             }
 
-            if (MenuChoice == 7)
+            
+
+            if (MenuChoice == 5)
             {
                 ExitProgram();
             }
+        
 
         }
 
@@ -135,7 +127,7 @@ namespace IgnatiusConsole
             Console.WriteLine();
             Console.WriteLine("1) All Questions,All Subjects");
             Console.WriteLine("2) All Questions on Your choice of Subject");
-            Console.WriteLine("3) A Selection of Random Questions On Your  Choice Of Subject");
+            Console.WriteLine("3) Custom Quiz Mode");
 
             Console.WriteLine("4) Return To The Main Menu");
 
@@ -163,6 +155,7 @@ namespace IgnatiusConsole
             }
 
         }
+
         private static void RandomQuestionsOnSubject()
         {
             IgnatiusBanner();
@@ -298,7 +291,60 @@ namespace IgnatiusConsole
                 }
             }
         }
+        private static void QuestionsMenu()
+        {
+            Console.Clear();
+            IgnatiusBanner();
+          
+            
+            Console.WriteLine("Please Enter the Number Of The Desired Option");
+            Console.WriteLine("1) Add Question");
+            Console.WriteLine("2) Show All Questions");
+            //Console.WriteLine("3) Delete Questions");
+            Console.WriteLine("3) Return To Main Menu");
+            int menuChoice = int.Parse(Console.ReadLine());
+            if (menuChoice == 1)
+            {
+                AddQuestion();
+            }
+            if(menuChoice== 2)
+            {
+                ShowQuestions();
+            }
 
+            if(menuChoice== 3)
+            {
+                MainMenu();                
+            }
+
+        }
+
+        private static void QuizTopicsMenu()
+        {
+            Console.Clear();
+            IgnatiusBanner();
+
+
+            Console.WriteLine("Please Enter the Number Of The Desired Option");
+            Console.WriteLine("1) Show Availiable Quiz Topics");
+            Console.WriteLine("2) Add New Quiz Topic");
+        
+            Console.WriteLine("3) Return To Main Menu");
+            int menuChoice = int.Parse(Console.ReadLine());
+            if (menuChoice == 1)
+            {
+                ShowQuizTopics();
+            }
+            if (menuChoice == 2)
+            {
+              AddQuizTopic();
+            }
+
+            if (menuChoice == 3)
+            {
+                MainMenu();
+            }
+        }
         private static void AllQuestionsOnSubject()
         {
             Console.Clear();
@@ -625,7 +671,7 @@ namespace IgnatiusConsole
             Console.WriteLine("The following topic has been added: " + AddTopic);
             Console.WriteLine("Press enter for the main menu ");
             Console.ReadLine();
-            MainMenu();
+            QuestionsMenu();
 
         }
 
@@ -652,13 +698,13 @@ namespace IgnatiusConsole
 
             if (QuizEndDecision == "menu")
             {
-                MainMenu();
+                QuizTopicsMenu();
 
             }
 
             else
             {
-                MainMenu();
+                QuizTopicsMenu();
             }
         }
         private static void HelpMenu()
