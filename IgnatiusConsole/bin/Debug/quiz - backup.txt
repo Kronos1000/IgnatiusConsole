@@ -1,0 +1,32 @@
+What is Ingatius|General Info|A fork of the midori Project|Ronan's Alter Ego|Nothing|1
+Is the Sky Blue|General Info|No|Maybe|Yes|3
+What Color is Midori|Midori|Blue|Green|Red|2
+What Flavor is Midori|Midori|Melon|Lime|Strawberry|1
+Does This Work|Testing|Maybe|No|Yes|3
+Are you sure this Works|Testing|Yes|Maybe|No|1
+Is it working|Testing|Yes|No|Maybe|1
+Is midori a drink|Midori|yes|no |maybe|1
+Which of the following C# Commands will display text on screen|ITC513|Console.WriteLine("Text");|Print("Text");|System.out.println("Text);|1
+Is SQL A Relational or Object oriented Database Model|ITC607|Object oriented Model|Relational Database Management System|Neither of the above options|2
+Which NZ City is known for Narrow Streets,Te Papa and the Cable Car|General Info|Auckland|Christchurch|Wellington|3
+What is the defintion of IMPLICIT story telling|ITC608|Anything that is directly communicated to the player|A  Story that is driven by the progress of the player|A story that is told by the game environment|3
+Which of these in an example of EXPLICIT story telling|ITC608|Cutscenes|Environmental Cues|//|1
+What is Confirmation Bias?|ITC608|The tendency to search for, favour and recall information in a way that supports or confirms someone's prior beliefs or values.|The process by which humans and animals learn to behave in such a way as to obtain rewards and avoid punishments.|Anything that is called out by text or speech|1
+Which of these is NOT a principle of good level design?|ITC608|Fun To Explore|Becomes more difficult as you progress|Tells a story without words|2
+Which of these is NOT a principle of good level design?|ITC608|Is Efficient|Dynamically Challenges you |Good colour usage|3
+Which of these is anything called out by text or speech?|ITC608|Explicit|Implicit|Emergent|1
+	What is the A in ADSR|ITC608|Approach|Arrival|Attack|3
+What is the D in ADSR|ITC608|Development|Derivision|Decay|3
+What is the S in ADSR|ITC608|Soundwave|Sustain|Stop|2
+What is the R in ADSR|ITC608|Release|Repeat|Reduce|1
+In terms of programming the acronym DRY usually refers to|ITC513|Avoiding the duplication of code|When code is lacking substance|data representation usin yaml|1
+Which Statement is true in regards to docuemtation during a programming project|ITC513|Documentation should be done after the project is complete|Documentation is wasteful of time and should be ignored|Documentation should be produced at all stages of the project|3
+Which form of visibility allows a method to only be seen by objects of the same class?|ITC513|Private|Public\|Internal|1
+For the declaration List: <string> list = new List<string>( ); Which statement accesses the THIRD element of the List?|ITC513|string name = list[2];|student = list.get(2);|string name = list[3];|1
+Which of the following will convert a string s to an integer num?|ITC513|num = int.Parse(s);|num = int.ParseInteger(s);|num =(int) s;|1
+What is a positive risk|ITC601|Oppourtunity|Benefit|Non-Existent|1
+What is a negative risk|ITC601|Danger|Hazard|Threat|3
+What is the percentage range of risk occurring|ITC601|0-100 %|1-99 %|90-100 %|2
+In managing uncertain events in the workplace, what is probability?|ITC601|The Likehood that event will occur|the chance of avoiding an incident|The consequences of the event occurring|1
+What type of risk response reduces the uncertainty to 0%?|ITC601|Avoidance|Acceptance|Share/Transfer|1
+Is the file there|Testing|Y|N|Maybe|1
