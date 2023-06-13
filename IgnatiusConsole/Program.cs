@@ -715,7 +715,8 @@ namespace IgnatiusConsole
 Important points to remember 
 1) The Quiz topic must exist in the quizTopics.txt file in order to have option of being quizzed on it.
 2) when you add a question ensure that the Subject feild Matches the subject in the quizTopics.txt file exactly
-   if needed use the ShowQuizTopic command before the AddQuestion Command.";
+   if needed use the ShowQuizTopic command before the AddQuestion Command.
+3) if there are no questions in the quiz bank the application will close when quiz is started";
 
             Console.WriteLine(helpText);
             Console.WriteLine();
