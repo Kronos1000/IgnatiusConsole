@@ -1,0 +1,2 @@
+INSERT INTO Questions (Question,Subject,Option1,Option2,Option3,Answer) VALUES('who is kronos|kronos|patrick|angus|alex|patrick
+INSERT INTO Questions (Question,Subject,Option1,Option2,Option3,Answer) VALUES('sdfsfg','g','32','2','2','32');

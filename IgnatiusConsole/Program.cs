@@ -82,6 +82,7 @@ namespace IgnatiusConsole
             Console.WriteLine("2) Questions");
             Console.WriteLine("3) Quiz Topics");
             Console.WriteLine("4) Instructions");
+            Console.WriteLine("5) Generate SQL Query to add questions (dev use only)");
             Console.WriteLine("5) Exit Program");
 
             int MenuChoice = int.Parse(Console.ReadLine());
@@ -107,10 +108,14 @@ namespace IgnatiusConsole
             {
                 HelpMenu();
             }
-
+               
+            if(MenuChoice ==5)
+            { AddQuestionSQL();
+            }
+                    
             
 
-            if (MenuChoice == 5)
+            if (MenuChoice == 6)
             {
                 ExitProgram();
             }
@@ -612,6 +617,40 @@ namespace IgnatiusConsole
 
             MainMenu();
 
+        }
+
+        private static void AddQuestionSQL() // Add Question Method 
+        {
+            Console.Clear();
+            IgnatiusBanner();
+            Console.WriteLine("Please Enter Question");
+            string q = Console.ReadLine();
+            Console.WriteLine("Which Paper is the Question for");
+
+            String qSubject = Console.ReadLine();
+            Console.WriteLine("Enter Multiple Choice Option 1 ");
+            String A = Console.ReadLine();
+            Console.WriteLine("Enter Multiple Choice Option 2");
+            String B = Console.ReadLine();
+            Console.WriteLine("Enter Multiple Choice Option 3 ");
+            String C = Console.ReadLine();
+            Console.WriteLine("Enter option number of Correct Answer ");
+            String CorrectANS = Console.ReadLine();
+
+            using (StreamWriter writer = File.AppendText("SQLQuestions.txt"))
+            {
+                string QuestionToADD = "INSERT INTO Questions (Question,Subject,Option1,Option2,Option3,Answer) VALUES('" +
+                                       q.Replace("'", "''") + "','" +
+                                       qSubject.Replace("'", "''") + "','" +
+                                       A.Replace("'", "''") + "','" +
+                                       B.Replace("'", "''") + "','" +
+                                       C.Replace("'", "''") + "','" +
+                                       CorrectANS + "');";
+
+                writer.WriteLine(QuestionToADD);
+            }
+
+            MainMenu();
         }
 
         private static void ShowQuestions()
