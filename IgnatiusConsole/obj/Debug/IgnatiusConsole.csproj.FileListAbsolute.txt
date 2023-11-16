@@ -18,7 +18,6 @@ D:\GitHub\IgnatiusConsole\IgnatiusConsole\bin\Debug\IgnatiusConsole.exe.config
 D:\GitHub\IgnatiusConsole\IgnatiusConsole\bin\Debug\IgnatiusConsole.exe
 D:\GitHub\IgnatiusConsole\IgnatiusConsole\bin\Debug\IgnatiusConsole.pdb
 D:\GitHub\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.csproj.AssemblyReference.cache
-D:\GitHub\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.csproj.SuggestedBindingRedirects.cache
 D:\GitHub\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.csproj.CoreCompileInputs.cache
 D:\GitHub\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.exe
 D:\GitHub\IgnatiusConsole\IgnatiusConsole\obj\Debug\IgnatiusConsole.pdb

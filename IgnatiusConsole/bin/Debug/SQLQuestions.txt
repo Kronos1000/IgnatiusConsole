@@ -1,2 +1,21 @@
-INSERT INTO Questions (Question,Subject,Option1,Option2,Option3,Answer) VALUES('who is kronos|kronos|patrick|angus|alex|patrick
-INSERT INTO Questions (Question,Subject,Option1,Option2,Option3,Answer) VALUES('sdfsfg','g','32','2','2','32');
+INSERT INTO Questions (Question, Subject, Option1, Option2, Option3, Answer) VALUES 
+
+
+
+
+
+('1234423','123','1','2','3','1'), 
+
+
+('rANDOMs','RANMDOMSHIT','1','2','3','1'), 
+
+
+('fsdgg','RANMDOMSHIT','1','2','3','1'), 
+
+
+('123','RANDOMCRAP','1','2','3','1'), 
+
+
+('dgofu','RANDOMCRAP','2','3','1','3'), 
+
+
