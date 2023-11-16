@@ -634,7 +634,7 @@ namespace IgnatiusConsole
             foreach (QuizQuestion question in QuestionList)
             {
                 // QCount++;
-                Console.WriteLine("[" + QCount + "]" + " " + question.Question);
+                Console.WriteLine("[" + QCount + "]" + " " + question.Question + " (" + question.Subject + ")");
                 QCount++;
             }
             Console.WriteLine();
