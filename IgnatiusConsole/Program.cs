@@ -75,9 +75,9 @@ namespace IgnatiusConsole
             Console.WriteLine("1) Start Quiz");
             Console.WriteLine("2) Questions");
             //Console.WriteLine("3) Quiz Topics");
-            Console.WriteLine("3) Instructions");
+         
 
-            Console.WriteLine("4) Exit Program");
+            Console.WriteLine("3) Exit Program");
 
             int MenuChoice = int.Parse(Console.ReadLine());
             if (MenuChoice == 1)
@@ -98,16 +98,12 @@ namespace IgnatiusConsole
             //}
 
 
-            if (MenuChoice == 3)
-            {
-                HelpMenu();
-            }
-               
+        
            
                     
             
 
-            if (MenuChoice == 4)
+            if (MenuChoice == 3)
             {
                 ExitProgram();
             }
@@ -716,35 +712,7 @@ namespace IgnatiusConsole
                 QuizTopicsMenu();
             }
         }
-        private static void HelpMenu()
-        {
-            Console.Clear();
-            IgnatiusBanner();
-            string helpText = @"*** Help Menu ***
-Important points to remember 
-1) The Quiz topic must exist in the quizTopics.txt file in order to have option of being quizzed on it.
-2) when you add a question ensure that the Subject feild Matches the subject in the quizTopics.txt file exactly
-   if needed use the ShowQuizTopic command before the AddQuestion Command.
-3) if there are no questions in the quiz bank the application will close when quiz is started";
-
-            Console.WriteLine(helpText);
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("   Type menu to return to the main Menu");
-
-            string QuizEndDecision = Console.ReadLine();
-
-            if (QuizEndDecision == "menu")
-            {
-                MainMenu();
-
-            }
-
-            else
-            {
-                MainMenu();
-            }
-        }
+       
         private static void ExitProgram()
         {
             System.Environment.Exit(0);
