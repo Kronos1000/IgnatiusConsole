@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
 
-
 namespace IgnatiusConsole
 {
     public class Program
@@ -122,7 +121,10 @@ namespace IgnatiusConsole
 
             if (MenuChoice == 3)
             {
-                ExitProgram();
+                BackendEditor.AddQuestions();
+                BackendEditor.CommitAndPushQuestions();
+               
+                //ExitProgram();
             }
         
 
