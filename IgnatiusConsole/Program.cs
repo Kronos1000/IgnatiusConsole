@@ -24,50 +24,71 @@ namespace IgnatiusConsole
         /// Get Data Methods
         public static List<QuizQuestion> GetData()
         {
-            List<QuizQuestion> QuestionList = new List<QuizQuestion>();
+            List<QuizQuestion> questionList = new List<QuizQuestion>();
 
-            using (StreamReader reader = new StreamReader("./quiz.txt"))
+            string questionPath = @"C:\Github\IgnatiusQuestionsCSV\Questions.csv";
+
+            using (StreamReader reader = new StreamReader(questionPath))
             {
+                // Skip header
+                reader.ReadLine();
+
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    string[] parts = line.Split('|');
 
-                    string Question = parts[0];
+                    if (string.IsNullOrWhiteSpace(line))
+                        continue;
 
+                    string[] parts = line.Split(',');
 
-                    string Subject = parts[1];
-                    string A = parts[2];
-                    string B = parts[3];
-                    string C = parts[4];
+                    if (parts.Length < 7)
+                        continue;
 
-                    string CorrectAnswer = parts[5];
+                    QuizQuestion q = new QuizQuestion(
+                        parts[1], // Question
+                        parts[2], // Subject
+                        parts[3], // Option1
+                        parts[4], // Option2
+                        parts[5], // Option3
+                        parts[6]  // Answer
+                    );
 
-                    QuizQuestion Q = new QuizQuestion(Question, Subject, A, B, C, CorrectAnswer);
-
-                    QuestionList.Add(Q);
-
+                    questionList.Add(q);
                 }
-                return QuestionList;
             }
-        }
 
+            return questionList;
+        }
         private static List<string> GetQuizTopics()
         {
-            List<string> TopicList = new List<string>();
+            List<string> topics = new List<string>();
 
-            using (StreamReader reader = new StreamReader("./quizTopics.txt"))
+            string subjectPath = @"C:\Github\IgnatiusQuestionsCSV\Subjects.csv";
+
+            using (StreamReader reader = new StreamReader(subjectPath))
             {
+                reader.ReadLine(); // Skip header
+
                 while (!reader.EndOfStream)
                 {
-                    TopicList.Add(reader.ReadLine());
+                    string line = reader.ReadLine();
+
+                    if (string.IsNullOrWhiteSpace(line))
+                        continue;
+
+                    string[] parts = line.Split(',');
+
+                    if (parts.Length >= 2)
+                        topics.Add(parts[1]);
                 }
-
-                return TopicList;
             }
+
+            return topics
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(x => x)
+                .ToList();
         }
-
-
 
 
         private static void MainMenu() // Main Menu Method 
@@ -80,9 +101,8 @@ namespace IgnatiusConsole
             Console.WriteLine(" Please Enter the Number of the task you want to perform");
             Console.WriteLine("1) Start Quiz");
             Console.WriteLine("2) Questions");
-            Console.WriteLine("3) Quiz Topics");
-            Console.WriteLine("4) Instructions");
-            Console.WriteLine("5) Exit Program");
+           
+            Console.WriteLine("3) Exit Program");
 
             int MenuChoice = int.Parse(Console.ReadLine());
             if (MenuChoice == 1)
@@ -91,26 +111,16 @@ namespace IgnatiusConsole
                 QuizMenu();
             }
 
-            if (MenuChoice == 2)
+          if (MenuChoice == 2 )
             {
-                QuestionsMenu();
+                ShowQuestions();
             }
 
 
-            if (MenuChoice == 3)
-            {
-               QuizTopicsMenu();
-            }
-
-
-            if (MenuChoice == 4)
-            {
-                HelpMenu();
-            }
-
+          
             
 
-            if (MenuChoice == 5)
+            if (MenuChoice == 3)
             {
                 ExitProgram();
             }
@@ -158,461 +168,391 @@ namespace IgnatiusConsole
 
         private static void RandomQuestionsOnSubject()
         {
-            IgnatiusBanner();
-            List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            List<QuizQuestion> quizQuestionSet = new List<QuizQuestion>();
-            double PlayerScore = 0; // Define Player Score counter Variable
-            double QuestionCounter = 0; // Count have many questions to been shown to player
-            QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
-            // Generate Random Number to use later 
-            Random RandQuestion = new Random();
-            int R = RandQuestion.Next(0, qArray.Length);
-
             Console.Clear();
             IgnatiusBanner();
-            Console.WriteLine("How Many Questions would you like");
 
-            int quizLength = int.Parse(Console.ReadLine());
+            List<QuizQuestion> questionList = GetData();
+            List<string> topicList = GetQuizTopics();
+
+            Console.WriteLine("How many questions would you like?");
+            Console.Write("Amount: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int quizLength))
+                return;
 
 
             Console.Clear();
             IgnatiusBanner();
-            Console.WriteLine("Please enter the number of the subject you would like to be tested on");
-            int tCount = 0; // variable to count the number of topics 
 
-            for (int i = 0; i < TopicArray.Length; i++)
+            Console.WriteLine("Select a Subject");
+            Console.WriteLine();
+
+            for (int i = 0; i < topicList.Count; i++)
             {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
+                Console.WriteLine($"{i + 1}) {topicList[i]}");
             }
 
-            int topicChoice = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            Console.Write("Choice: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int topicChoice))
+                return;
+
+            if (topicChoice < 1 || topicChoice > topicList.Count)
+                return;
 
 
+            string selectedSubject = topicList[topicChoice - 1];
 
-            // for loop to read in subject specfic questions 
-            for (int i = 0; i < qArray.Length; i++)
+
+            List<QuizQuestion> quizQuestions = questionList
+                .Where(q => q.Subject.Equals(
+                    selectedSubject,
+                    StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+
+            if (quizQuestions.Count == 0)
             {
-                if (qArray[i].Subject == TopicArray[topicChoice])
-                {
-                    quizQuestionSet.Add(qArray[i]);
-                }
+                Console.WriteLine("No questions found for this subject.");
+                Console.ReadLine();
+                return;
             }
-            // create quiz array 
-            QuizQuestion[] QuizArray = quizQuestionSet.ToArray();
-            if (QuestionCounter + 1 <= quizLength)
+
+
+            Random random = new Random();
+
+            quizQuestions = quizQuestions
+                .OrderBy(x => random.Next())
+                .Take(Math.Min(quizLength, quizQuestions.Count))
+                .ToList();
+
+
+            double playerScore = 0;
+            double questionCounter = 0;
+
+
+            foreach (QuizQuestion question in quizQuestions)
             {
-
-                for (int i = 0; i < quizLength; i++)
-                {
-                    Console.Clear();
-                    IgnatiusBanner();
-                    R = RandQuestion.Next(0, QuizArray.Length);
-
-
-                    double questionDisplayCount = QuestionCounter + 1;
-                    int QuestionAmountShown = quizLength;
-                    Console.WriteLine("Question " + questionDisplayCount + " of " + QuestionAmountShown);
-                    // return question at array postion R 
-                    Console.WriteLine(QuizArray[R].Question);
-                    Console.WriteLine("   1) " + QuizArray[R].OptionONE);
-                    Console.WriteLine("   2) " + QuizArray[R].OptionTWO);
-                    Console.WriteLine("   3) " + QuizArray[R].OptionTHREE);
-
-                    String UserAnswer = Console.ReadLine().ToUpper();
-
-                    if (UserAnswer == QuizArray[R].CorrectAnswer)
-                    {
-                        Console.WriteLine("Correct");
-                        PlayerScore++; // Increase score if answer is Correct 
-                        QuestionCounter++; // Increase Question Counter 
-                        if (QuestionCounter <= quizLength - 1)
-                        {
-                            Console.WriteLine("Press Enter For the next Question");
-                        }
-
-                        if (QuestionCounter == quizLength)
-                        {
-                            Console.WriteLine("Press Enter For Quiz Results");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry The Answer is Incorrect");
-                        Console.WriteLine("The Correct Answer was: " + QuizArray[R].CorrectAnswer);
-                        QuestionCounter++; // Increase Question Counter 
-                        if (QuestionCounter <= quizLength - 1)
-                        {
-                            Console.WriteLine("Press Enter For the next Question");
-                        }
-
-                        if (QuestionCounter == quizLength)
-                        {
-                            Console.WriteLine("Press Enter For Quiz Results");
-                        }
-                    }
-
-                    UserAnswer = Console.ReadLine();
-                    if (QuestionCounter == quizLength - 1)
-                    {
-                        Console.WriteLine("Press Enter For the next Question");
-                    }
-
-                }
-
-
-                // Display Player Score when # is entered 
                 Console.Clear();
                 IgnatiusBanner();
-                double percentage = PlayerScore / QuestionCounter * 100;
-                Console.WriteLine("You have Answered " + PlayerScore + " out of " + QuestionCounter + " Questions Correctly");
-                Console.WriteLine("Overall Percentage: {0:0.00} Percent", percentage);
 
-                Console.WriteLine("Type exit to close program");
-                Console.WriteLine("Type menu to return to the main Menu");
+                Console.WriteLine($"Question {questionCounter + 1} of {quizQuestions.Count}");
+                Console.WriteLine();
 
-                string QuizEndDecision = Console.ReadLine();
+                Console.WriteLine(question.Question);
+                Console.WriteLine($"1) {question.OptionONE}");
+                Console.WriteLine($"2) {question.OptionTWO}");
+                Console.WriteLine($"3) {question.OptionTHREE}");
+                Console.WriteLine();
 
-                if (QuizEndDecision == "menu")
+
+                Console.Write("Answer: ");
+
+                string choice = Console.ReadLine();
+
+
+                string userAnswer = "";
+
+                switch (choice)
                 {
-                    MainMenu();
+                    case "1":
+                        userAnswer = question.OptionONE;
+                        break;
 
+                    case "2":
+                        userAnswer = question.OptionTWO;
+                        break;
+
+                    case "3":
+                        userAnswer = question.OptionTHREE;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        Console.ReadLine();
+                        continue;
                 }
 
-                if (QuizEndDecision == "exit")
+
+                if (userAnswer.Trim().Equals(
+                    question.CorrectAnswer.Trim(),
+                    StringComparison.OrdinalIgnoreCase))
                 {
-                    System.Environment.Exit(0);
+                    Console.WriteLine();
+                    Console.WriteLine("✅ Correct!");
+                    playerScore++;
                 }
-                else // Close program if user enters anything other than "menu" OR "exit" 
+                else
                 {
-                    System.Environment.Exit(0);
+                    Console.WriteLine();
+                    Console.WriteLine("❌ Incorrect.");
+                    Console.WriteLine("Correct Answer: " + question.CorrectAnswer);
                 }
+
+
+                questionCounter++;
+
+                Console.WriteLine();
+                Console.WriteLine("Press Enter for next question...");
+                Console.ReadLine();
             }
-        }
-        private static void QuestionsMenu()
-        {
+
+
             Console.Clear();
             IgnatiusBanner();
-          
-            
-            Console.WriteLine("Please Enter the Number Of The Desired Option");
-            Console.WriteLine("1) Add Question");
-            Console.WriteLine("2) Show All Questions");
-            //Console.WriteLine("3) Delete Questions");
-            Console.WriteLine("3) Return To Main Menu");
-            int menuChoice = int.Parse(Console.ReadLine());
-            if (menuChoice == 1)
-            {
-                AddQuestion();
-            }
-            if(menuChoice== 2)
-            {
-                ShowQuestions();
-            }
-
-            if(menuChoice== 3)
-            {
-                MainMenu();                
-            }
-
-        }
-
-        private static void QuizTopicsMenu()
-        {
-            Console.Clear();
-            IgnatiusBanner();
 
 
-            Console.WriteLine("Please Enter the Number Of The Desired Option");
-            Console.WriteLine("1) Show Availiable Quiz Topics");
-            Console.WriteLine("2) Add New Quiz Topic");
-        
-            Console.WriteLine("3) Return To Main Menu");
-            int menuChoice = int.Parse(Console.ReadLine());
-            if (menuChoice == 1)
-            {
-                ShowQuizTopics();
-            }
-            if (menuChoice == 2)
-            {
-              AddQuizTopic();
-            }
+            double percentage = (playerScore / questionCounter) * 100;
 
-            if (menuChoice == 3)
+
+            Console.WriteLine(
+                $"You answered {playerScore} out of {questionCounter} questions correctly.");
+
+            Console.WriteLine(
+                $"Overall Percentage: {percentage:0.00}%");
+
+
+            Console.WriteLine();
+            Console.WriteLine("Type menu to return to Main Menu");
+            Console.WriteLine("Type exit to close program");
+
+
+            string quizEndDecision = Console.ReadLine().ToLower();
+
+
+            if (quizEndDecision == "menu")
             {
                 MainMenu();
             }
+
+            Environment.Exit(0);
         }
         private static void AllQuestionsOnSubject()
         {
             Console.Clear();
-
-            IgnatiusBanner();
-            List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-
-            double PlayerScore = 0; // Define Player Score counter Variable
-            double QuestionCounter = 0; // Count have many questions to been shown to player
-            QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
-            List<QuizQuestion> quizQuestionSet = new List<QuizQuestion>();
-            //  QuizQuestion[] QuizArray = quizQuestionSet.ToArray();
-            Console.Clear();
             IgnatiusBanner();
 
+            List<QuizQuestion> questionList = GetData();
+            List<string> topicList = GetQuizTopics();
 
-            Console.Clear();
-            IgnatiusBanner();
-            Console.WriteLine("Please enter the number of the subject you would like to be tested on");
-            int tCount = 0; // variable to count the number of topics 
+            Console.WriteLine("Select a Subject");
+            Console.WriteLine();
 
-            for (int i = 0; i < TopicArray.Length; i++)
+            for (int i = 0; i < topicList.Count; i++)
             {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
+                Console.WriteLine($"{i + 1}) {topicList[i]}");
             }
 
-            int topicChoice = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+            Console.Write("Choice: ");
 
+            if (!int.TryParse(Console.ReadLine(), out int topicChoice))
+                return;
 
+            if (topicChoice < 1 || topicChoice > topicList.Count)
+                return;
 
-            // for loop to read in subject specfic questions 
-            for (int i = 0; i < qArray.Length; i++)
+            string selectedSubject = topicList[topicChoice - 1];
+
+            List<QuizQuestion> quizQuestions = questionList
+                .Where(q => q.Subject.Equals(selectedSubject, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (quizQuestions.Count == 0)
             {
-                if (qArray[i].Subject == TopicArray[topicChoice])
-                {
-                    quizQuestionSet.Add(qArray[i]);
-                }
+                Console.WriteLine("No questions found for this subject.");
+                Console.ReadLine();
+                return;
             }
 
+            double playerScore = 0;
+            double questionCounter = 0;
 
-            // create quiz array 
-            QuizQuestion[] QuizArray = quizQuestionSet.ToArray();
-
-            int quizLength = QuizArray.Length;
-            if (QuestionCounter + 1 <= quizLength)
+            for (int i = 0; i < quizQuestions.Count; i++)
             {
-
-                for (int i = 0; i < quizLength; i++)
-                {
-                    Console.Clear();
-                    IgnatiusBanner();
-
-
-                    double questionDisplayCount = QuestionCounter + 1;
-                    int QuestionAmountShown = quizLength;
-                    Console.WriteLine("Question " + questionDisplayCount + " of " + QuestionAmountShown);
-                    // return question at array postion R 
-                    Console.WriteLine(QuizArray[i].Question);
-                    Console.WriteLine("   1) " + QuizArray[i].OptionONE);
-                    Console.WriteLine("   2) " + QuizArray[i].OptionTWO);
-                    Console.WriteLine("   3) " + QuizArray[i].OptionTHREE);
-
-                    String UserAnswer = Console.ReadLine().ToUpper();
-
-                    if (UserAnswer == QuizArray[i].CorrectAnswer)
-                    {
-                        Console.WriteLine("Correct");
-                        PlayerScore++; // Increase score if answer is Correct 
-                        QuestionCounter++; // Increase Question Counter 
-                        if (QuestionCounter <= quizLength - 1)
-                        {
-                            Console.WriteLine("Press Enter For the next Question");
-                        }
-
-                        if (QuestionCounter == quizLength)
-                        {
-                            Console.WriteLine("Press Enter For Quiz Results");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry The Answer is Incorrect");
-                        Console.WriteLine("The Correct Answer was: " + QuizArray[i].CorrectAnswer);
-                        QuestionCounter++; // Increase Question Counter 
-                        if (QuestionCounter <= quizLength - 1)
-                        {
-                            Console.WriteLine("Press Enter For the next Question");
-                        }
-
-                        if (QuestionCounter == quizLength)
-                        {
-                            Console.WriteLine("Press Enter For Quiz Results");
-                        }
-                    }
-
-                    UserAnswer = Console.ReadLine();
-                    if (QuestionCounter == quizLength - 1)
-                    {
-                        Console.WriteLine("Press Enter For the next Question");
-                    }
-
-                }
-
-
-                // Display Player Score when # is entered 
                 Console.Clear();
                 IgnatiusBanner();
-                double percentage = PlayerScore / QuestionCounter * 100;
-                Console.WriteLine("You have Answered " + PlayerScore + " out of " + QuestionCounter + " Questions Correctly");
-                Console.WriteLine("Overall Percentage: {0:0.00} Percent", percentage);
 
-                Console.WriteLine("Type exit to close program");
-                Console.WriteLine("Type menu to return to the main Menu");
+                Console.WriteLine($"Question {i + 1} of {quizQuestions.Count}");
+                Console.WriteLine();
 
-                string QuizEndDecision = Console.ReadLine();
+                Console.WriteLine(quizQuestions[i].Question);
+                Console.WriteLine($"1) {quizQuestions[i].OptionONE}");
+                Console.WriteLine($"2) {quizQuestions[i].OptionTWO}");
+                Console.WriteLine($"3) {quizQuestions[i].OptionTHREE}");
+                Console.WriteLine();
 
-                if (QuizEndDecision == "menu")
+                Console.Write("Answer: ");
+                string choice = Console.ReadLine();
+
+                string userAnswer = "";
+
+                switch (choice)
                 {
-                    MainMenu();
+                    case "1":
+                        userAnswer = quizQuestions[i].OptionONE;
+                        break;
 
+                    case "2":
+                        userAnswer = quizQuestions[i].OptionTWO;
+                        break;
+
+                    case "3":
+                        userAnswer = quizQuestions[i].OptionTHREE;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        Console.ReadLine();
+                        i--;
+                        continue;
                 }
 
-                if (QuizEndDecision == "exit")
+                if (userAnswer.Trim().Equals(
+                    quizQuestions[i].CorrectAnswer.Trim(),
+                    StringComparison.OrdinalIgnoreCase))
                 {
-                    System.Environment.Exit(0);
+                    Console.WriteLine();
+                    Console.WriteLine("✅ Correct!");
+                    playerScore++;
                 }
-                else // Close program if user enters anything other than "menu" OR "exit" 
+                else
                 {
-                    System.Environment.Exit(0);
+                    Console.WriteLine();
+                    Console.WriteLine("❌ Incorrect.");
+                    Console.WriteLine("Correct Answer: " + quizQuestions[i].CorrectAnswer);
                 }
+
+                questionCounter++;
+
+                Console.WriteLine();
+                Console.WriteLine("Press Enter to continue...");
+                Console.ReadLine();
             }
+
+            Console.Clear();
+            IgnatiusBanner();
+
+            double percentage = (playerScore / questionCounter) * 100;
+
+            Console.WriteLine($"You answered {playerScore} out of {questionCounter} correctly.");
+            Console.WriteLine($"Overall Percentage: {percentage:0.00}%");
+            Console.WriteLine();
+
+            Console.WriteLine("Type 'menu' to return to the Main Menu");
+            Console.WriteLine("Type 'exit' to quit");
+
+            string decision = Console.ReadLine().ToLower();
+
+            if (decision == "menu")
+            {
+                MainMenu();
+            }
+
+            Environment.Exit(0);
         }
 
 
 
 
 
-        private static void QuizOnEverything() // Quiz Method
+        private static void QuizOnEverything()
         {
             Console.Clear();
             IgnatiusBanner();
 
-            List<QuizQuestion> QuestionList = GetData(); // Take data from Second Method 
-            double PlayerScore = 0; // Define Player Score counter Variable
-            double QuestionCounter = 0; // Count have many questions to been shown to player
+            List<QuizQuestion> questionList = GetData();
 
-            QuizQuestion[] qArray = QuestionList.ToArray(); // Convet List to Array 
+            double playerScore = 0;
+            double questionCounter = 0;
 
+            QuizQuestion[] qArray = questionList.ToArray();
 
             int quizLength = qArray.Length;
-            if (QuestionCounter + 1 <= quizLength)
+
+            for (int i = 0; i < quizLength; i++)
             {
-
-                for (int i = 0; i < quizLength; i++)
-                {
-                    Console.Clear();
-                    IgnatiusBanner();
-
-                    double questionDisplayCount = QuestionCounter + 1;
-                    int QuestionAmountShown = quizLength;
-                    Console.WriteLine("Question " + questionDisplayCount + " of " + QuestionAmountShown);
-                    // return question at array postion i 
-                    Console.WriteLine(qArray[i].Question);
-                    Console.WriteLine("   1): " + qArray[i].OptionONE);
-                    Console.WriteLine("   2) " + qArray[i].OptionTWO);
-                    Console.WriteLine("   3) " + qArray[i].OptionTHREE);
-
-                    String UserAnswer = Console.ReadLine().ToUpper();
-
-                    if (UserAnswer == qArray[i].CorrectAnswer)
-                    {
-                        Console.WriteLine("Correct");
-                        PlayerScore++; // Increase score if answer is Correct 
-                        QuestionCounter++; // Increase Question Counter 
-                        if (QuestionCounter <= quizLength - 1)
-                        {
-                            Console.WriteLine("Press Enter For the next Question");
-                        }
-
-                        if (QuestionCounter == quizLength)
-                        {
-                            Console.WriteLine("Press Enter For Quiz Results");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry The Answer is Incorrect");
-                        Console.WriteLine("The Correct Answer was: " + qArray[i].CorrectAnswer);
-                        QuestionCounter++; // Increase Question Counter 
-                        if (QuestionCounter <= quizLength - 1)
-                        {
-                            Console.WriteLine("Press Enter For the next Question");
-                        }
-
-                        if (QuestionCounter == quizLength)
-                        {
-                            Console.WriteLine("Press Enter For Quiz Results");
-                        }
-                    }
-
-                    UserAnswer = Console.ReadLine();
-
-
-                }
-
-                // Display Player Score when # is entered 
                 Console.Clear();
                 IgnatiusBanner();
 
-                double percentage = PlayerScore / QuestionCounter * 100;
-                Console.WriteLine("You have Answered " + PlayerScore + " out of " + QuestionCounter + " Questions Correctly");
-                Console.WriteLine("Overall Percentage: {0:0.00} Percent", percentage);
+                Console.WriteLine($"Question {i + 1} of {quizLength}");
+                Console.WriteLine();
 
-                Console.WriteLine("Type exit to close program");
-                Console.WriteLine("Type menu to return to the main Menu");
+                Console.WriteLine(qArray[i].Question);
+                Console.WriteLine("1) " + qArray[i].OptionONE);
+                Console.WriteLine("2) " + qArray[i].OptionTWO);
+                Console.WriteLine("3) " + qArray[i].OptionTHREE);
+                Console.WriteLine();
 
-                string QuizEndDecision = Console.ReadLine();
+                Console.Write("Answer: ");
+                string choice = Console.ReadLine();
 
-                if (QuizEndDecision == "menu")
+                string userAnswer = "";
+
+                switch (choice)
                 {
-                    MainMenu();
+                    case "1":
+                        userAnswer = qArray[i].OptionONE;
+                        break;
 
+                    case "2":
+                        userAnswer = qArray[i].OptionTWO;
+                        break;
+
+                    case "3":
+                        userAnswer = qArray[i].OptionTHREE;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        Console.ReadLine();
+                        i--;
+                        continue;
                 }
 
-                if (QuizEndDecision == "exit")
+                if (userAnswer.Trim().Equals(
+                    qArray[i].CorrectAnswer.Trim(),
+                    StringComparison.OrdinalIgnoreCase))
                 {
-                    System.Environment.Exit(0);
+                    Console.WriteLine();
+                    Console.WriteLine("✅ Correct!");
+                    playerScore++;
                 }
-                else // Close program if user enters anything other than "menu" OR "exit" 
+                else
                 {
-                    System.Environment.Exit(0);
+                    Console.WriteLine();
+                    Console.WriteLine("❌ Incorrect.");
+                    Console.WriteLine("Correct Answer: " + qArray[i].CorrectAnswer);
                 }
 
+                questionCounter++;
+
+                Console.WriteLine();
+                Console.WriteLine("Press Enter to continue...");
+                Console.ReadLine();
             }
-        }
-        private static void AddQuestion() // Add Question Method 
-        {
+
             Console.Clear();
             IgnatiusBanner();
-            Console.WriteLine("Please Enter Question");
-            string q = Console.ReadLine();
-            Console.WriteLine("Which Paper is the Question for");
 
+            double percentage = (playerScore / questionCounter) * 100;
 
-            String qSubject = Console.ReadLine();
-            Console.WriteLine("Enter Multiple Choice Option 1 ");
-            String A = Console.ReadLine();
-            Console.WriteLine("Enter Multiple Choice Option 2");
-            String B = Console.ReadLine();
-            Console.WriteLine("Enter Multiple Choice Option 3 ");
-            String C = Console.ReadLine();
-            Console.WriteLine("Enter option number  of Correct Answer ");
-            String CorrectANS = Console.ReadLine();
+            Console.WriteLine($"You answered {playerScore} out of {questionCounter} correctly.");
+            Console.WriteLine($"Overall Percentage: {percentage:0.00}%");
+            Console.WriteLine();
 
-            using (StreamWriter writer = File.AppendText("quiz.txt"))
-            {
-                string QuestionToADD = (q + "|" + qSubject + "|" + A + "|" + B + "|" + C + "|" + CorrectANS);
+            Console.WriteLine("Type 'menu' for Main Menu");
+            Console.WriteLine("Type 'exit' to quit");
 
-                writer.WriteLine(QuestionToADD);
-            }
+            string decision = Console.ReadLine().ToLower();
 
+            if (decision == "menu")
+                MainMenu();
 
-            MainMenu();
-
+            Environment.Exit(0);
         }
+       
 
         private static void ShowQuestions()
         {
@@ -639,41 +579,7 @@ namespace IgnatiusConsole
 
         }
 
-        private static void AddQuizTopic()
-        {
-            Console.Clear();
-            IgnatiusBanner();
-
-            Console.WriteLine("Add New Quiz Topic");
-            Console.WriteLine("The following Topics are currently availiable");
-
-            int tCount = 0; // variable to count the number of topics 
-            List<string> TopicList = GetQuizTopics();
-            string[] TopicArray = TopicList.ToArray();
-            for (int i = 0; i < TopicArray.Length; i++)
-            {
-                Console.WriteLine("[" + tCount + "]" + " " + TopicArray[i]);
-                tCount++;
-            }
-            // blank line before prompt
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine("Please enter the quiz Topic you wish to add to the quiz bank");
-
-            string AddTopic = Console.ReadLine();
-           
-            using (StreamWriter writer = File.AppendText("quizTopics.txt"))
-            {
-                writer.WriteLine(AddTopic);
-            }
-
-            Console.WriteLine("The following topic has been added: " + AddTopic);
-            Console.WriteLine("Press enter for the main menu ");
-            Console.ReadLine();
-            QuestionsMenu();
-
-        }
+       
 
         private static void ShowQuizTopics()
         {
@@ -694,48 +600,9 @@ namespace IgnatiusConsole
             Console.WriteLine();
 
             Console.WriteLine("Press enter to return to the main menu");
-            string QuizEndDecision = Console.ReadLine();
-
-            if (QuizEndDecision == "menu")
-            {
-                QuizTopicsMenu();
-
-            }
-
-            else
-            {
-                QuizTopicsMenu();
-            }
+           
         }
-        private static void HelpMenu()
-        {
-            Console.Clear();
-            IgnatiusBanner();
-            string helpText = @"*** Help Menu ***
-Important points to remember 
-1) The Quiz topic must exist in the quizTopics.txt file in order to have option of being quizzed on it.
-2) when you add a question ensure that the Subject feild Matches the subject in the quizTopics.txt file exactly
-   if needed use the ShowQuizTopic command before the AddQuestion Command.
-3) if there are no questions in the quiz bank the application will close when quiz is started";
-
-            Console.WriteLine(helpText);
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("   Type menu to return to the main Menu");
-
-            string QuizEndDecision = Console.ReadLine();
-
-            if (QuizEndDecision == "menu")
-            {
-                MainMenu();
-
-            }
-
-            else
-            {
-                MainMenu();
-            }
-        }
+      
         private static void ExitProgram()
         {
             System.Environment.Exit(0);
