@@ -99,9 +99,10 @@ namespace IgnatiusConsole
             // Console.WriteLine("Welcome To the Quiz Room");
             Console.WriteLine(" Please Enter the Number of the task you want to perform");
             Console.WriteLine("1) Start Quiz");
-            Console.WriteLine("2) Questions");
-           
-            Console.WriteLine("3) Exit Program");
+            Console.WriteLine("2) View Questions");
+            Console.WriteLine("3) Add Questions");
+            Console.WriteLine("4) Add Subject");
+            Console.WriteLine("5) Exit Program");
 
             int MenuChoice = int.Parse(Console.ReadLine());
             if (MenuChoice == 1)
@@ -127,6 +128,10 @@ namespace IgnatiusConsole
                 //ExitProgram();
             }
         
+            if (MenuChoice == 4)
+            {
+                BackendEditor.AddSubject();
+            }
 
         }
 

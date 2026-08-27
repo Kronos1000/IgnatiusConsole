@@ -89,7 +89,7 @@ class BackendEditor
 
 
 
-    static void AddSubject()
+   public static void AddSubject()
     {
 
         CreateSubjectFile();
@@ -773,6 +773,7 @@ class BackendEditor
         Console.WriteLine(
             new string('-', 85)
         );
+
 
 
 
